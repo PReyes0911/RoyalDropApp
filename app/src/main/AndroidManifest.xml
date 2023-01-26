@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.royaldropapp">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RoyalDrop"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".AdminRiderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RiderActivity"
+            android:exported="false"
+            android:label=""
+            android:parentActivityName=".AdminActivity"
+            android:theme="@style/Theme.RoyalDrop.NoActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".GeneratePDFActivity"
+            android:exported="false"
+            android:label=""
+            android:parentActivityName=".AdminActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PersonalOrderActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:clearTaskOnLaunch="true"
+            android:exported="false"
+            android:label=""
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.RoyalDrop.NoActionBar" />
+        <activity
+            android:name=".ThankYouActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SummaryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".OrderActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".VerifyPhoneNoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.RoyalDrop.NoActionBar" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="false"
+            android:label=""
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.RoyalDrop.NoActionBar"
+            android:usesCleartextTraffic="true" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

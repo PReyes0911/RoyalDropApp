@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "693403653749",
+    "firebase_url": "https://royaldropapp-default-rtdb.firebaseio.com",
+    "project_id": "royaldropapp",
+    "storage_bucket": "royaldropapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693403653749:android:801367dfbaec2203740a3c",
+        "android_client_info": {
+          "package_name": "com.example.royaldropapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693403653749-g4n57mtl8l53r5f7ktv7lgtrv730v4it.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeKHdKZdffRAyJbgEjh3xrjqV4bQa4GoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693403653749-g4n57mtl8l53r5f7ktv7lgtrv730v4it.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/panel"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/blue"
+        android:orientation="horizontal"
+        android:weightSum="16">
+
+        <ImageView
+            android:id="@+id/returnback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginTop="3dp"
+            android:layout_weight="2"
+            android:src="@drawable/back_arrow"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_weight="11"
+            android:fontFamily="@font/bungee"
+            android:gravity="center"
+            android:text="Delivery Invoice"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/custname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Phone"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Address"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/rider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Rider"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/flex"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#5C5C5C" />
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:flexDirection="column"
+        app:flexWrap="nowrap"
+        app:justifyContent="center">
+
+        <TextView
+            android:id="@+id/n1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N1"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N2"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N3"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N4"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N5"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N6"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N7"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/n8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="N8"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/flex"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#5C5C5C" />
+
+    <TextView
+        android:id="@+id/orderdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="date"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/flex"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#5C5C5C" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="00"
+        android:textAlignment="textStart"
+        android:textColor="#FF9800"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/flex"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
+        android:background="#5C5C5C" />
+
+    <Button
+        android:id="@+id/btn_print"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Print Receipt"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:transitionName="button_tran"
+        app:backgroundTint="#A9EDFF"
+        app:cornerRadius="12dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp" />
+</LinearLayout>

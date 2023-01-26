@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A9EDFF"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:gravity="center"
+    tools:context=".AdminProductPriceFragment">
+
+    <RelativeLayout
+        android:id="@+id/fragment_layout_productprice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="11"
+            android:fontFamily="@font/bungee"
+            android:gravity="center"
+            android:text="Product Maintenance"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_recycler_productprice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btn_add_product"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="50dp"
+            android:padding="20dp" />
+
+        <Button
+            android:id="@+id/btn_add_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text1"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:layout_marginStart="230dp"
+            android:background="@android:color/transparent"
+            android:text="ADD PRODUCT" />
+
+
+    </RelativeLayout>
+</ScrollView>

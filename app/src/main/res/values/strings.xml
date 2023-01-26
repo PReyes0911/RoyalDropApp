@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">RoyalDrop</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rider">Rider:</string>
+
+    <string-array name="finishandcancel">
+        <item>Finish</item>
+        <item>Cancel</item>
+    </string-array>
+    <string-array name="waterfilter">
+        <item>Select Water</item>
+        <item>Show Mineral/Alkaline</item>
+        <item>Show Mineral Water</item>
+        <item>Show Alkaline Water</item>
+    </string-array>
+    <string-array name="watergallon">
+        <item>Select Gallon</item>
+        <item>Show Round/Slim</item>
+        <item>Show Round</item>
+        <item>Show Slim</item>
+    </string-array>
+    <string-array name="waterrefornew">
+        <item>Select Order Type</item>
+        <item>Show Refill/New</item>
+        <item>Show Refill</item>
+        <item>Show New</item>
+    </string-array>
+    <string-array name="kindofwater">
+        <item>Select</item>
+        <item>Mineral</item>
+        <item>Alkaline</item>
+    </string-array>
+    <string-array name="producttype">
+        <item>Select</item>
+        <item>Refill Gallon</item>
+        <item>New Gallon</item>
+    </string-array>
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ThankYouActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/bungee"
+        android:text="Order Successful"
+        android:textColor="#000000"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bungee"
+            android:text="Please Wait for the Rider to Come in your house!"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/delivery" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Please be mindful that our closing time is 7:00 PM">
+
+        </TextView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bungee"
+        android:text="Thank You!"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/antic"
+        android:text="This will redirect you to the Order Screen (5)"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+
+</LinearLayout>
