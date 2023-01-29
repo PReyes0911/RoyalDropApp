@@ -458,7 +458,7 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
-        @BindView(R.id.btnPrint)
+        @BindView(R.id.btn_print)
         Button btnprint;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
