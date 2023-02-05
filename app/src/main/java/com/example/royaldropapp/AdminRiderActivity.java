@@ -48,20 +48,19 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
 
     SharedPreferences sharedPreferences;
 
-    DatabaseReference reference;
+    DatabaseReference EmployeeRef;
 
     public static final String fileName = "login";
-    public static final String Rider1 = "ridername1";
-    public static final String Rider2 = "ridername2";
-    public static final String Rider3 = "ridername3";
+    public static final String Emp1 = "Employee_name1";
+    public static final String Emp2 = "Employee_name2";
+    public static final String Emp3 = "Employee_name3";
 
     Button logout,datetoday;
 
-    String ridernumber;
+    String employeenumber;
 
-    TextView ridername,totalsales;
+    TextView employeeName,totalsales;
 
-    String rider1,rider2,rider3;
 
     DatePickerDialog datePickerDialog;
 
@@ -72,14 +71,14 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_rider);
 
-        logout = findViewById(R.id.logout_rider);
-        ridername = findViewById(R.id.ridername);
+        logout = findViewById(R.id.logout_employee);
+        employeeName = findViewById(R.id.employeeName);
         datetoday = findViewById(R.id.datePicker);
         totalsales = findViewById(R.id.totalsales);
 
         datetoday.setText(getTodaysDate());
 
-        reference = FirebaseDatabase.getInstance().getReference("Admin").child("riders");
+        EmployeeRef = FirebaseDatabase.getInstance().getReference("Admin").child("employees");
 
         sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
 
@@ -104,15 +103,15 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
-        if(sharedPreferences.contains(Rider1)){
+        if(sharedPreferences.contains(Emp1)){
 
 
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    ridernumber = snapshot.child("Rider1").getKey();
-                    String ridername1 = snapshot.child("Rider1").child("name").getValue(String.class);
-                    ridername.setText(ridername1);
+                    employeenumber = snapshot.child("employees").child("Employee1").getKey();
+                    String Emp1_name = snapshot.child("employees").child("Employee1").child("name").getValue(String.class);
+                    employeeName.setText(Emp1_name);
                     loadRiderFromFirebase();
                     loadHistoryFromFirebase();
 
@@ -124,15 +123,15 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                 }
             });
 
-        }else if(sharedPreferences.contains(Rider2)){
+        }else if(sharedPreferences.contains(Emp2)){
 
 
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    ridernumber = snapshot.child("Rider2").getKey();
-                    String ridername2 = snapshot.child("Rider2").child("name").getValue(String.class);
-                    ridername.setText(ridername2);
+                    employeenumber = snapshot.child("employees").child("Employee2").getKey();
+                    String Emp2_name = snapshot.child("employees").child("Employee2").child("name").getValue(String.class);
+                    employeeName.setText(Emp2_name);
                     loadRiderFromFirebase();
                     loadHistoryFromFirebase();
                 }
@@ -142,15 +141,15 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
 
                 }
             });
-        }else if(sharedPreferences.contains(Rider3)){
+        }else if(sharedPreferences.contains(Emp3)){
 
 
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    ridernumber = snapshot.child("Rider3").getKey();
-                    String ridername3 = snapshot.child("Rider3").child("name").getValue(String.class);
-                    ridername.setText(ridername3);
+                    employeenumber = snapshot.child("employees").child("Employee3").getKey();
+                    String Emp3_name = snapshot.child("employees").child("Employee3").child("name").getValue(String.class);
+                    employeeName.setText(Emp3_name);
                     loadRiderFromFirebase();
                     loadHistoryFromFirebase();
                 }
@@ -168,7 +167,7 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
     private void loadRiderFromFirebase(){
         List<RiderModel> riderModels = new ArrayList<>();
         FirebaseDatabase.getInstance()
-                .getReference("Admin").child("riders").child(ridernumber).child("DeliveryList")
+                .getReference("Admin").child("employees").child(employeenumber).child("DeliveryList")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -275,7 +274,7 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
 
         FirebaseDatabase.getInstance()
                 .getReference("Admin")
-                .child("riders").child(ridernumber).child("TotalSales")
+                .child("employees").child(employeenumber).child("TotalSales")
                 .child(datetoday.getText().toString()).child("totalsales")
                 .addValueEventListener(new ValueEventListener() {
                     @Override

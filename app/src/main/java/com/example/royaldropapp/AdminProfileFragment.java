@@ -55,7 +55,7 @@ public class AdminProfileFragment extends Fragment {
         adminemail = view.findViewById(R.id.admin_email);
         updateuser = view.findViewById(R.id.admin_btn_username);
         updatepassword = view.findViewById(R.id.admin_btn_Password);
-        checkriders = view.findViewById(R.id.btn_admin_riders);
+        checkriders = view.findViewById(R.id.btn_admin_employee);
 
         dialog=new Dialog(view.getContext());
 

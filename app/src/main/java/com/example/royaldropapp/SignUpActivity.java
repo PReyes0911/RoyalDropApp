@@ -120,8 +120,12 @@ public class SignUpActivity extends AppCompatActivity {
     private Boolean validateName(){
         String val = regName.getEditText().getText().toString();
 
+
         if(val.isEmpty()){
             regName.setError("Field cannot be empty");
+            return false;
+        }else if(!val.matches("[a-zA-Z ]+")) {
+            regName.setError("Invalid Input! Alphabetical characters only");
             return false;
         }else{
             regName.setError(null);
@@ -136,7 +140,11 @@ public class SignUpActivity extends AppCompatActivity {
         if(val.isEmpty()){
             regHomeAddress.setError("Field cannot be empty");
             return false;
-        }else{
+        } else if(!val.matches("[a-zA-Z]{3} [0-9]{1,5} [a-zA-Z]{3} [0-9]{1,5}( [a-zA-Z.]*){1,4},?( [a-zA-Z]*){1,3},?( [a-zA-Z]*){1,3},? [0-9]{4}")){
+            regHomeAddress.setError("Enter complete address(Unit num Street Subd,City,State,Zipcode)");
+            return false;
+        }
+        else{
             regHomeAddress.setError(null);
             regHomeAddress.setErrorEnabled(false);
             return true;
@@ -166,7 +174,12 @@ public class SignUpActivity extends AppCompatActivity {
         if(val.isEmpty()){
             regPhoneNo.setError("Field cannot be empty");
             return false;
-        }else{
+
+        }else if (!val.matches("(^(\\+)(\\d){12}$)|(^[09]\\d{10}$)")){
+            regPhoneNo.setError("Invalid input");
+            return false;
+        }
+        else{
             regPhoneNo.setError(null);
             regPhoneNo.setErrorEnabled(false);
             return true;
@@ -178,8 +191,10 @@ public class SignUpActivity extends AppCompatActivity {
         String retype = regRetypePass.getEditText().getText().toString();
         String passwordval = "^" +
                 "(?=.*[a-zA-Z])" +
+                "(?=.*[0-9])" +
+                "(?=.*[@#$%^&._+])" +
                 "(?=\\S+$)" +
-                ".{4,}" +
+                ".{8,}" +
                 "$";
         if(val.isEmpty()){
             regpassword.setError("Field cannot be empty");
@@ -188,7 +203,7 @@ public class SignUpActivity extends AppCompatActivity {
         else if(!val.matches(passwordval)){
             regpassword.setError("Password is too weak");
             return false;
-        }else if(val.length()<=4) {
+        }else if(val.length()<=8) {
             regpassword.setError("Password Too Short");
             return false;
         }else if(!val.matches(retype)){

@@ -22,20 +22,20 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:text="@string/rider"
             android:fontFamily="@font/source_sans_pro"
+            android:gravity="center"
+            android:text="@string/employee"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/ridername"
+            android:id="@+id/employeeName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="90dp"
             android:gravity="center"
-            android:text="NAME"
+            android:hint="NAME"
             android:fontFamily="@font/source_sans_pro"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -43,7 +43,7 @@
 
 
         <Button
-            android:id="@+id/logout_rider"
+            android:id="@+id/logout_employee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
              android:layout_marginTop="10dp"

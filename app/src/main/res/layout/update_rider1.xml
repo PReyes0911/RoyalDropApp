@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro"
                 android:gravity="center"
-                android:text="Update Rider Details/Credentials"
+                android:text="Update Employee Account"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -60,12 +60,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Rider Name"/>
+                    android:text="Employee Name"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/update_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="Full Name"
                     app:errorIconDrawable="@null"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Rider Username"/>
+                    android:text="Employee Username"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/update_username"
                     android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Rider Password"/>
+                    android:text="Employee Password"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/update_password"
                     android:layout_width="match_parent"

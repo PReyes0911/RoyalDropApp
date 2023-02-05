@@ -28,13 +28,13 @@ public class RiderActivity extends AppCompatActivity {
 
     ImageView goback;
 
-    TextInputLayout ridername1,ridername2,ridername3;
-    TextInputLayout riderusername1,riderusername2,riderusername3;
-    TextInputLayout riderpassword1,riderpassword2,riderpassword3;
+    TextInputLayout Empname1,Empname2,Empname3;
+    TextInputLayout empUsername1,empUsername2,empUsername3;
+    TextInputLayout empPassword1,empPassword2,empPassword3;
 
-    Button editrider1,editrider2,editrider3;
+    Button editEmp1,editEmp2,editEmp3;
 
-    DatabaseReference RiderReference;
+    DatabaseReference EmployeeReference;
 
     Dialog dialog;
 
@@ -43,21 +43,21 @@ public class RiderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
-        RiderReference = FirebaseDatabase.getInstance().getReference();
+        EmployeeReference = FirebaseDatabase.getInstance().getReference();
 
         goback = findViewById(R.id.returnback);
-        ridername1 = findViewById(R.id.ridername1);
-        ridername2 = findViewById(R.id.ridername2);
-        ridername3 = findViewById(R.id.ridername3);
-        riderusername1 = findViewById(R.id.UserRider1);
-        riderusername2 = findViewById(R.id.UserRider2);
-        riderusername3 = findViewById(R.id.UserRider3);
-        riderpassword1 = findViewById(R.id.PassRider1);
-        riderpassword2 = findViewById(R.id.PassRider2);
-        riderpassword3 = findViewById(R.id.PassRider3);
-        editrider1 = findViewById(R.id.btn_rider1);
-        editrider2 = findViewById(R.id.btn_rider2);
-        editrider3 = findViewById(R.id.btn_rider3);
+        Empname1 = findViewById(R.id.empname1);
+        Empname2 = findViewById(R.id.empname2);
+        Empname3 = findViewById(R.id.empname3);
+        empUsername1 = findViewById(R.id.UserEmployee1);
+        empUsername2 = findViewById(R.id.UserEmployee2);
+        empUsername3 = findViewById(R.id.UserEmployee3);
+        empPassword1 = findViewById(R.id.PassEmployee1);
+        empPassword2 = findViewById(R.id.PassEmployee2);
+        empPassword3 = findViewById(R.id.PassEmployee3);
+        editEmp1 = findViewById(R.id.btn_emp1);
+        editEmp2 = findViewById(R.id.btn_emp2);
+        editEmp3 = findViewById(R.id.btn_emp3);
 
         dialog=new Dialog(this);
 
@@ -68,32 +68,32 @@ public class RiderActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.no_animation, R.anim.slide_down);
             }
         });
-        RiderReference.addValueEventListener(new ValueEventListener() {
+        EmployeeReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String rider1name = snapshot.child("Admin").child("riders").child("Rider1").child("name").getValue(String.class);
-                String rider1username = snapshot.child("Admin").child("riders").child("Rider1").child("username").getValue(String.class);
-                String rider1pass = snapshot.child("Admin").child("riders").child("Rider1").child("password").getValue(String.class);
+                String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
+                String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
+                String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
 
-                ridername1.getEditText().setText(rider1name);
-                riderusername1.getEditText().setText(rider1username);
-                riderpassword1.getEditText().setText(rider1pass);
+                Empname1.getEditText().setText(Emp1_name);
+                empUsername1.getEditText().setText(Emp1_username);
+                empPassword1.getEditText().setText(Emp1_pass);
 
-                String rider2name = snapshot.child("Admin").child("riders").child("Rider2").child("name").getValue(String.class);
-                String rider2username = snapshot.child("Admin").child("riders").child("Rider2").child("username").getValue(String.class);
-                String rider2pass = snapshot.child("Admin").child("riders").child("Rider2").child("password").getValue(String.class);
+                String Emp2_name = snapshot.child("Admin").child("employees").child("Employee2").child("name").getValue(String.class);
+                String Emp2_username = snapshot.child("Admin").child("employees").child("Employee2").child("username").getValue(String.class);
+                String Emp2_pass = snapshot.child("Admin").child("employees").child("Employee2").child("password").getValue(String.class);
 
-                ridername2.getEditText().setText(rider2name);
-                riderusername2.getEditText().setText(rider2username);
-                riderpassword2.getEditText().setText(rider2pass);
+                Empname2.getEditText().setText(Emp2_name);
+                empUsername2.getEditText().setText(Emp2_username);
+                empPassword2.getEditText().setText(Emp2_pass);
 
-                String rider3name = snapshot.child("Admin").child("riders").child("Rider3").child("name").getValue(String.class);
-                String rider3username = snapshot.child("Admin").child("riders").child("Rider3").child("username").getValue(String.class);
-                String rider3pass = snapshot.child("Admin").child("riders").child("Rider3").child("password").getValue(String.class);
+                String Emp3_name = snapshot.child("Admin").child("employees").child("Employee3").child("name").getValue(String.class);
+                String Emp3_username = snapshot.child("Admin").child("employees").child("Employee3").child("username").getValue(String.class);
+                String Emp3_pass = snapshot.child("Admin").child("employees").child("Employee3").child("password").getValue(String.class);
 
-                ridername3.getEditText().setText(rider3name);
-                riderusername3.getEditText().setText(rider3username);
-                riderpassword3.getEditText().setText(rider3pass);
+                Empname3.getEditText().setText(Emp3_name);
+                empUsername3.getEditText().setText(Emp3_username);
+                empPassword3.getEditText().setText(Emp3_pass);
             }
 
             @Override
@@ -101,7 +101,7 @@ public class RiderActivity extends AppCompatActivity {
 
             }
         });
-        editrider1.setOnClickListener(new View.OnClickListener() {
+        editEmp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.setContentView(R.layout.update_rider1);
@@ -116,16 +116,16 @@ public class RiderActivity extends AppCompatActivity {
 
                 ProgressBar progressBar = dialog.findViewById(R.id.progress_update);
 
-                RiderReference.addValueEventListener(new ValueEventListener() {
+                EmployeeReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String rider1name = snapshot.child("Admin").child("riders").child("Rider1").child("name").getValue(String.class);
-                        String rider1username = snapshot.child("Admin").child("riders").child("Rider1").child("username").getValue(String.class);
-                        String rider1pass = snapshot.child("Admin").child("riders").child("Rider1").child("password").getValue(String.class);
+                        String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
+                        String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
+                        String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
 
-                        name1.getEditText().setText(rider1name);
-                        username1.getEditText().setText(rider1username);
-                        password1.getEditText().setText(rider1pass);
+                        name1.getEditText().setText(Emp1_name);
+                        username1.getEditText().setText(Emp1_username);
+                        password1.getEditText().setText(Emp1_pass);
 
                     }
 
@@ -142,13 +142,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider1").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider1").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider1").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
+                                String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
+                                String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
+                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(Emp1_name) || !username1.getEditText().getText().toString().equals(Emp1_username) || !password1.getEditText().getText().toString().equals(Emp1_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -178,13 +178,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider1").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider1").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider1").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
+                                String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
+                                String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
+                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(Emp1_name) || !username1.getEditText().getText().toString().equals(Emp1_username) || !password1.getEditText().getText().toString().equals(Emp1_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -214,13 +214,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider1").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider1").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider1").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
+                                String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
+                                String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
+                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(Emp1_name) || !username1.getEditText().getText().toString().equals(Emp1_username) || !password1.getEditText().getText().toString().equals(Emp1_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -267,9 +267,9 @@ public class RiderActivity extends AppCompatActivity {
                                     String updatedusername1 = username1.getEditText().getText().toString();
                                     String updatedpassword1 = password1.getEditText().getText().toString();
 
-                                    RiderReference.child("Admin").child("riders").child("Rider1").child("name").setValue(updatedname1);
-                                    RiderReference.child("Admin").child("riders").child("Rider1").child("username").setValue(updatedusername1);
-                                    RiderReference.child("Admin").child("riders").child("Rider1").child("password").setValue(updatedpassword1);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee1").child("name").setValue(updatedname1);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee1").child("username").setValue(updatedusername1);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee1").child("password").setValue(updatedpassword1);
                                     dialog.dismiss();
                                 }
 
@@ -286,31 +286,31 @@ public class RiderActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        editrider2.setOnClickListener(new View.OnClickListener() {
+        editEmp2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.setContentView(R.layout.update_rider1);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                TextInputLayout name1 = dialog.findViewById(R.id.update_name);
-                TextInputLayout username1 = dialog.findViewById(R.id.update_username);
-                TextInputLayout password1 = dialog.findViewById(R.id.update_password);
+                TextInputLayout name2 = dialog.findViewById(R.id.update_name);
+                TextInputLayout username2 = dialog.findViewById(R.id.update_username);
+                TextInputLayout password2 = dialog.findViewById(R.id.update_password);
 
                 Button btnok = dialog.findViewById(R.id.btn_change);
                 Button btnnotyet = dialog.findViewById(R.id.btn_no);
 
                 ProgressBar progressBar = dialog.findViewById(R.id.progress_update);
 
-                RiderReference.addValueEventListener(new ValueEventListener() {
+                EmployeeReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String rider1name = snapshot.child("Admin").child("riders").child("Rider2").child("name").getValue(String.class);
-                        String rider1username = snapshot.child("Admin").child("riders").child("Rider2").child("username").getValue(String.class);
-                        String rider1pass = snapshot.child("Admin").child("riders").child("Rider2").child("password").getValue(String.class);
+                        String Emp2_name = snapshot.child("Admin").child("employees").child("Employee2").child("name").getValue(String.class);
+                        String Emp2_username = snapshot.child("Admin").child("employees").child("Employee2").child("username").getValue(String.class);
+                        String Emp2_pass = snapshot.child("Admin").child("employees").child("Employee2").child("password").getValue(String.class);
 
-                        name1.getEditText().setText(rider1name);
-                        username1.getEditText().setText(rider1username);
-                        password1.getEditText().setText(rider1pass);
+                        name2.getEditText().setText(Emp2_name);
+                        username2.getEditText().setText(Emp2_username);
+                        password2.getEditText().setText(Emp2_pass);
 
                     }
 
@@ -319,7 +319,7 @@ public class RiderActivity extends AppCompatActivity {
 
                     }
                 });
-                name1.getEditText().addTextChangedListener(new TextWatcher() {
+                name2.getEditText().addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -327,13 +327,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider2").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider2").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider2").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp2_name = snapshot.child("Admin").child("employees").child("Employee2").child("name").getValue(String.class);
+                                String Emp2_username = snapshot.child("Admin").child("employees").child("Employee2").child("username").getValue(String.class);
+                                String Emp2_pass = snapshot.child("Admin").child("employees").child("Employee2").child("password").getValue(String.class);
+                                btnok.setEnabled(!name2.getEditText().getText().toString().equals(Emp2_name) || !username2.getEditText().getText().toString().equals(Emp2_username) || !password2.getEditText().getText().toString().equals(Emp2_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -355,7 +355,7 @@ public class RiderActivity extends AppCompatActivity {
 
                     }
                 });
-                username1.getEditText().addTextChangedListener(new TextWatcher() {
+                username2.getEditText().addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -363,13 +363,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider2").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider2").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider2").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp2_name = snapshot.child("Admin").child("employees").child("Employee2").child("name").getValue(String.class);
+                                String Emp2_username = snapshot.child("Admin").child("employees").child("Employee2").child("username").getValue(String.class);
+                                String Emp2_pass = snapshot.child("Admin").child("employees").child("Employee2").child("password").getValue(String.class);
+                                btnok.setEnabled(!name2.getEditText().getText().toString().equals(Emp2_name) || !username2.getEditText().getText().toString().equals(Emp2_username) || !password2.getEditText().getText().toString().equals(Emp2_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -391,7 +391,7 @@ public class RiderActivity extends AppCompatActivity {
 
                     }
                 });
-                password1.getEditText().addTextChangedListener(new TextWatcher() {
+                password2.getEditText().addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -399,13 +399,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider2").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider2").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider2").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp2_name = snapshot.child("Admin").child("employees").child("Employee2").child("name").getValue(String.class);
+                                String Emp2_username = snapshot.child("Admin").child("employees").child("Employee2").child("username").getValue(String.class);
+                                String Emp2_pass = snapshot.child("Admin").child("employees").child("Employee2").child("password").getValue(String.class);
+                                btnok.setEnabled(!name2.getEditText().getText().toString().equals(Emp2_name) || !username2.getEditText().getText().toString().equals(Emp2_username) || !password2.getEditText().getText().toString().equals(Emp2_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -430,17 +430,17 @@ public class RiderActivity extends AppCompatActivity {
                 btnok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(name1.getEditText().getText().toString().isEmpty()&&username1.getEditText().getText().toString().isEmpty()&&password1.getEditText().getText().toString().isEmpty()){
-                            name1.setError("Invalid Credentials");
-                            username1.setError("Invalid Credentials");
-                            password1.setError("Invalid Credentials");
+                        if(name2.getEditText().getText().toString().isEmpty()&&username2.getEditText().getText().toString().isEmpty()&&password2.getEditText().getText().toString().isEmpty()){
+                            name2.setError("Invalid Credentials");
+                            username2.setError("Invalid Credentials");
+                            password2.setError("Invalid Credentials");
                         }else{
                             new CountDownTimer(3000, 1000) {
 
                                 public void onTick(long millisUntilFinished) {
-                                    name1.setError(null);
-                                    username1.setError(null);
-                                    password1.setError(null);
+                                    name2.setError(null);
+                                    username2.setError(null);
+                                    password2.setError(null);
                                     progressBar.setVisibility(View.VISIBLE);
                                     btnok.setVisibility(View.GONE);
                                     btnnotyet.setVisibility(View.GONE);
@@ -448,13 +448,13 @@ public class RiderActivity extends AppCompatActivity {
 
                                 public void onFinish() {
                                     Toast.makeText(RiderActivity.this, "Successfully Updated!", Toast.LENGTH_SHORT).show();
-                                    String updatedname1 = name1.getEditText().getText().toString();
-                                    String updatedusername1 = username1.getEditText().getText().toString();
-                                    String updatedpassword1 = password1.getEditText().getText().toString();
+                                    String updatedname2 = name2.getEditText().getText().toString();
+                                    String updatedusername2 = username2.getEditText().getText().toString();
+                                    String updatedpassword2 = password2.getEditText().getText().toString();
 
-                                    RiderReference.child("Admin").child("riders").child("Rider2").child("name").setValue(updatedname1);
-                                    RiderReference.child("Admin").child("riders").child("Rider2").child("username").setValue(updatedusername1);
-                                    RiderReference.child("Admin").child("riders").child("Rider2").child("password").setValue(updatedpassword1);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee2").child("name").setValue(updatedname2);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee2").child("username").setValue(updatedusername2);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee2").child("password").setValue(updatedpassword2);
                                     dialog.dismiss();
                                 }
 
@@ -471,31 +471,31 @@ public class RiderActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        editrider3.setOnClickListener(new View.OnClickListener() {
+        editEmp3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.setContentView(R.layout.update_rider1);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                TextInputLayout name1 = dialog.findViewById(R.id.update_name);
-                TextInputLayout username1 = dialog.findViewById(R.id.update_username);
-                TextInputLayout password1 = dialog.findViewById(R.id.update_password);
+                TextInputLayout name3 = dialog.findViewById(R.id.update_name);
+                TextInputLayout username3 = dialog.findViewById(R.id.update_username);
+                TextInputLayout password3 = dialog.findViewById(R.id.update_password);
 
                 Button btnok = dialog.findViewById(R.id.btn_change);
                 Button btnnotyet = dialog.findViewById(R.id.btn_no);
 
                 ProgressBar progressBar = dialog.findViewById(R.id.progress_update);
 
-                RiderReference.addValueEventListener(new ValueEventListener() {
+                EmployeeReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String rider1name = snapshot.child("Admin").child("riders").child("Rider3").child("name").getValue(String.class);
-                        String rider1username = snapshot.child("Admin").child("riders").child("Rider3").child("username").getValue(String.class);
-                        String rider1pass = snapshot.child("Admin").child("riders").child("Rider3").child("password").getValue(String.class);
+                        String Emp3_name = snapshot.child("Admin").child("employees").child("Employee3").child("name").getValue(String.class);
+                        String Emp3_username = snapshot.child("Admin").child("employees").child("Employee3").child("username").getValue(String.class);
+                        String Emp3_pass = snapshot.child("Admin").child("employees").child("Employee3").child("password").getValue(String.class);
 
-                        name1.getEditText().setText(rider1name);
-                        username1.getEditText().setText(rider1username);
-                        password1.getEditText().setText(rider1pass);
+                        name3.getEditText().setText(Emp3_name);
+                        username3.getEditText().setText(Emp3_username);
+                        password3.getEditText().setText(Emp3_pass);
 
                     }
 
@@ -504,7 +504,7 @@ public class RiderActivity extends AppCompatActivity {
 
                     }
                 });
-                name1.getEditText().addTextChangedListener(new TextWatcher() {
+                name3.getEditText().addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -512,13 +512,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider3").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider3").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider3").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp3_name = snapshot.child("Admin").child("employees").child("Employee3").child("name").getValue(String.class);
+                                String Emp3_username = snapshot.child("Admin").child("employees").child("Employee3").child("username").getValue(String.class);
+                                String Emp3_pass = snapshot.child("Admin").child("employees").child("Employee3").child("password").getValue(String.class);
+                                btnok.setEnabled(!name3.getEditText().getText().toString().equals(Emp3_name) || !username3.getEditText().getText().toString().equals(Emp3_username) || !password3.getEditText().getText().toString().equals(Emp3_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -540,7 +540,7 @@ public class RiderActivity extends AppCompatActivity {
 
                     }
                 });
-                username1.getEditText().addTextChangedListener(new TextWatcher() {
+                username3.getEditText().addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -548,13 +548,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider3").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider3").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider3").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp3_name = snapshot.child("Admin").child("employees").child("Employee3").child("name").getValue(String.class);
+                                String Emp3_username = snapshot.child("Admin").child("employees").child("Employee3").child("username").getValue(String.class);
+                                String Emp3_pass = snapshot.child("Admin").child("employees").child("Employee3").child("password").getValue(String.class);
+                                btnok.setEnabled(!name3.getEditText().getText().toString().equals(Emp3_name) || !username3.getEditText().getText().toString().equals(Emp3_username) || !password3.getEditText().getText().toString().equals(Emp3_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -576,7 +576,7 @@ public class RiderActivity extends AppCompatActivity {
 
                     }
                 });
-                password1.getEditText().addTextChangedListener(new TextWatcher() {
+                password3.getEditText().addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -584,13 +584,13 @@ public class RiderActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        RiderReference.addValueEventListener(new ValueEventListener() {
+                        EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String rider1name = snapshot.child("Admin").child("riders").child("Rider3").child("name").getValue(String.class);
-                                String rider1username = snapshot.child("Admin").child("riders").child("Rider3").child("username").getValue(String.class);
-                                String rider1pass = snapshot.child("Admin").child("riders").child("Rider3").child("password").getValue(String.class);
-                                btnok.setEnabled(!name1.getEditText().getText().toString().equals(rider1name) || !username1.getEditText().getText().toString().equals(rider1username) || !password1.getEditText().getText().toString().equals(rider1pass));
+                                String Emp3_name = snapshot.child("Admin").child("employees").child("Employee3").child("name").getValue(String.class);
+                                String Emp3_username = snapshot.child("Admin").child("employees").child("Employee3").child("username").getValue(String.class);
+                                String Emp3_pass = snapshot.child("Admin").child("employees").child("Employee3").child("password").getValue(String.class);
+                                btnok.setEnabled(!name3.getEditText().getText().toString().equals(Emp3_name) || !username3.getEditText().getText().toString().equals(Emp3_username) || !password3.getEditText().getText().toString().equals(Emp3_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
                                     btnok.setTextColor(Color.BLACK);
@@ -615,17 +615,17 @@ public class RiderActivity extends AppCompatActivity {
                 btnok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(name1.getEditText().getText().toString().isEmpty()&&username1.getEditText().getText().toString().isEmpty()&&password1.getEditText().getText().toString().isEmpty()){
-                            name1.setError("Invalid Credentials");
-                            username1.setError("Invalid Credentials");
-                            password1.setError("Invalid Credentials");
+                        if(name3.getEditText().getText().toString().isEmpty()&&username3.getEditText().getText().toString().isEmpty()&&password3.getEditText().getText().toString().isEmpty()){
+                            name3.setError("Invalid Credentials");
+                            username3.setError("Invalid Credentials");
+                            password3.setError("Invalid Credentials");
                         }else{
                             new CountDownTimer(3000, 1000) {
 
                                 public void onTick(long millisUntilFinished) {
-                                    name1.setError(null);
-                                    username1.setError(null);
-                                    password1.setError(null);
+                                    name3.setError(null);
+                                    username3.setError(null);
+                                    password3.setError(null);
                                     progressBar.setVisibility(View.VISIBLE);
                                     btnok.setVisibility(View.GONE);
                                     btnnotyet.setVisibility(View.GONE);
@@ -633,13 +633,13 @@ public class RiderActivity extends AppCompatActivity {
 
                                 public void onFinish() {
                                     Toast.makeText(RiderActivity.this, "Successfully Updated!", Toast.LENGTH_SHORT).show();
-                                    String updatedname1 = name1.getEditText().getText().toString();
-                                    String updatedusername1 = username1.getEditText().getText().toString();
-                                    String updatedpassword1 = password1.getEditText().getText().toString();
+                                    String updatedname3 = name3.getEditText().getText().toString();
+                                    String updatedusername3 = username3.getEditText().getText().toString();
+                                    String updatedpassword3 = password3.getEditText().getText().toString();
 
-                                    RiderReference.child("Admin").child("riders").child("Rider3").child("name").setValue(updatedname1);
-                                    RiderReference.child("Admin").child("riders").child("Rider3").child("username").setValue(updatedusername1);
-                                    RiderReference.child("Admin").child("riders").child("Rider3").child("password").setValue(updatedpassword1);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee3").child("name").setValue(updatedname3);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee3").child("username").setValue(updatedusername3);
+                                    EmployeeReference.child("Admin").child("employees").child("Employee3").child("password").setValue(updatedpassword3);
                                     dialog.dismiss();
                                 }
 

@@ -147,11 +147,11 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_admin_riders"
+        android:id="@+id/btn_admin_employee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Check Rider(s) Account"
+        android:text="Check Employee(s) Account"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:fontFamily="@font/source_sans_pro"
