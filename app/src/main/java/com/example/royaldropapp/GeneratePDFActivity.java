@@ -117,7 +117,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
         tb6 = findViewById(R.id.table6);
         tb7 = findViewById(R.id.table7);
         tb8 = findViewById(R.id.table8);
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.header_pdf);
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.header);
         scaledbmp = Bitmap.createScaledBitmap(bmp, 1200, 518, false);
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getApplicationContext(),R.array.waterfilter,  R.layout.spinner_item);
