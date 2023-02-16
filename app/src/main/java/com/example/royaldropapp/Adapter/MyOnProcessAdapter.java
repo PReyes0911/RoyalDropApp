@@ -167,33 +167,6 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
         String name8 = String.valueOf(new StringBuilder().append(deliverModelList.get(position).getName8()));
         String qty8 =  String.valueOf(new StringBuilder().append(deliverModelList.get(position).getQty8()));
 
-        holder.btnprint.setOnClickListener(view -> {
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("Name1", name1);
-            intent.putExtra("Name2", name2);
-            intent.putExtra("Name3", name3);
-            intent.putExtra("Name4", name4);
-            intent.putExtra("Name5", name5);
-            intent.putExtra("Name6", name6);
-            intent.putExtra("Name7", name7);
-            intent.putExtra("Name8", name8);
-            intent.putExtra("Qty1", Integer.parseInt(qty1));
-            intent.putExtra("Qty2", Integer.parseInt(qty2));
-            intent.putExtra("Qty3", Integer.parseInt(qty3));
-            intent.putExtra("Qty4", Integer.parseInt(qty4));
-            intent.putExtra("Qty5", Integer.parseInt(qty5));
-            intent.putExtra("Qty6", Integer.parseInt(qty6));
-            intent.putExtra("Qty7", Integer.parseInt(qty7));
-            intent.putExtra("Qty8", Integer.parseInt(qty8));
-            intent.putExtra("CustomerN", holder.customer.getText().toString());
-            intent.putExtra("PhoneNum", holder.phone.getText().toString());
-            intent.putExtra("Address", holder.txtAddress.getText().toString());
-            intent.putExtra("Total", holder.txtTotalOrderP.getText().toString());
-            intent.putExtra("Date", holder.date.getText().toString());
-            intent.putExtra("Rider", holder.rider.getText().toString());
-            context.startActivity(intent);
-
-        });
 
         holder.btnOFD.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -458,8 +431,6 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
-        @BindView(R.id.btn_print)
-        Button btnprint;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
         @BindView(R.id.txtTotalOrderPrice)

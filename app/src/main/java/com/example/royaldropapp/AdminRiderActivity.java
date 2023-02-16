@@ -20,8 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.royaldropapp.Adapter.MyOnProcessAdapter;
+import com.example.royaldropapp.Adapter.MyOrderAdapter;
 import com.example.royaldropapp.Adapter.MyRiderAdapter;
+import com.example.royaldropapp.Listener.IDeliverLoadListener;
+import com.example.royaldropapp.Listener.IProductLoadListener;
 import com.example.royaldropapp.Listener.IRiderLoadListener;
+import com.example.royaldropapp.Model.DeliverModel;
+import com.example.royaldropapp.Model.ProductModel;
 import com.example.royaldropapp.Model.RiderModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +43,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadListener {
+public class AdminRiderActivity extends AppCompatActivity implements IProductLoadListener, IDeliverLoadListener  {
 
     @BindView(R.id.rider_RL)
     RelativeLayout fragML;
@@ -46,6 +52,9 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
     @BindView(R.id.rider_RV_finish)
     RecyclerView fragFinish;
     IRiderLoadListener riderLoadListener;
+
+    IProductLoadListener productLoadListener;
+    IDeliverLoadListener deliverLoadListener;
 
 
     SharedPreferences sharedPreferences;
@@ -112,15 +121,15 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragRecy.setVisibility(View.GONE);
-                fragFinish.setVisibility(View.VISIBLE);
+                fragRecy.setVisibility(View.VISIBLE);
+                fragFinish.setVisibility(View.GONE);
             }
         });
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragRecy.setVisibility(View.VISIBLE);
-                fragFinish.setVisibility(View.GONE);
+                fragRecy.setVisibility(View.GONE);
+                fragFinish.setVisibility(View.VISIBLE);
             }
         });
         if(sharedPreferences.contains(Emp1)){
@@ -132,7 +141,8 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                     employeenumber = snapshot.child("Employee1").getKey();
                     String Emp1_name = snapshot.child("Employee1").child("name").getValue(String.class);
                     employeeName.setText(Emp1_name);
-                    loadRiderFromFirebase();
+                    loadOrderFromFirebase();
+                    loadDeliverFromFirebase();
                     loadHistoryFromFirebase();
 
                 }
@@ -152,7 +162,8 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                     employeenumber = snapshot.child("Employee2").getKey();
                     String Emp2_name = snapshot.child("Employee2").child("name").getValue(String.class);
                     employeeName.setText(Emp2_name);
-                    loadRiderFromFirebase();
+                    loadOrderFromFirebase();
+                    loadDeliverFromFirebase();
                     loadHistoryFromFirebase();
                 }
 
@@ -170,7 +181,7 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                     employeenumber = snapshot.child("employees").child("Employee3").getKey();
                     String Emp3_name = snapshot.child("employees").child("Employee3").child("name").getValue(String.class);
                     employeeName.setText(Emp3_name);
-                    loadRiderFromFirebase();
+                    loadOrderFromFirebase();
                     loadHistoryFromFirebase();
                 }
 
@@ -181,6 +192,7 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
             });
         }
         init();
+        init2();
         initDatePicker();
 
     }
@@ -212,15 +224,82 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                     }
                 });
     }
+    private void loadOrderFromFirebase(){
+        List<ProductModel> productModels = new ArrayList<>();
+        FirebaseDatabase.getInstance()
+                .getReference("Orders")
+                .child(getTodaysDate())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists())
+                        {
+                            for(DataSnapshot productsnapshot:snapshot.getChildren())
+                            {
+                                ProductModel productModel = productsnapshot.getValue(ProductModel.class);
+                                productModel.setKey(productsnapshot.getKey());
+                                productModel.setTotalPrice(productModel.getTotalPrice());
+                                productModels.add(productModel);
+                            }
+                            productLoadListener.onProductLoadSuccess(productModels);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        productLoadListener.onProductLoadFailed(error.getMessage());
+
+                    }
+                });
+    }
+    private void loadDeliverFromFirebase(){
+        List<DeliverModel> deliverModels = new ArrayList<>();
+        FirebaseDatabase.getInstance()
+                .getReference("Delivered")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists())
+                        {
+                            for(DataSnapshot deliversnapshot:snapshot.getChildren())
+                            {
+                                DeliverModel deliverModel = deliversnapshot.getValue(DeliverModel.class);
+                                deliverModel.setKey(deliversnapshot.getKey());
+                                deliverModel.setTotalPrice(deliverModel.getTotalPrice());
+                                deliverModels.add(deliverModel);
+                            }
+                            deliverLoadListener.onDeliverLoadSuccess(deliverModels);
+                        }else{
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        deliverLoadListener.onDeliverLoadFailed(error.getMessage());
+
+                    }
+                });
+    }
     private void init(){
         ButterKnife.bind(this);
 
-        riderLoadListener = this;
+        productLoadListener = this;
+        deliverLoadListener = this;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         fragRecy.setLayoutManager(layoutManager);
         fragRecy.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+    }
+    private void init2(){
+        ButterKnife.bind(this);
+
+        deliverLoadListener = this;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        fragFinish.setLayoutManager(layoutManager);
+        fragFinish.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
     }
 
 
@@ -317,18 +396,31 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
     }
 
 
+    @Override
+    public void onDeliverLoadSuccess(List<DeliverModel> deliverModelList) {
+
+        MyOnProcessAdapter adapter = new MyOnProcessAdapter(getApplicationContext(),deliverModelList);
+        fragFinish.setAdapter(adapter);
+
+    }
 
     @Override
-    public void onRiderLoadSuccess(List<RiderModel> riderModelList) {
+    public void onDeliverLoadFailed(String message) {
 
-        MyRiderAdapter adapter = new MyRiderAdapter(this,riderModelList);
+        Snackbar.make(fragML,message,Snackbar.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onProductLoadSuccess(List<ProductModel> productModelList) {
+        MyOrderAdapter adapter = new MyOrderAdapter(getApplicationContext(),productModelList,deliverLoadListener);
         fragRecy.setAdapter(adapter);
 
     }
 
     @Override
-    public void onRiderLoadFailed(String message) {
-
+    public void onProductLoadFailed(String message) {
         Snackbar.make(fragML,message,Snackbar.LENGTH_LONG).show();
     }
+
 }
