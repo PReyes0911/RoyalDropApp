@@ -41,8 +41,10 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
 
     @BindView(R.id.rider_RL)
     RelativeLayout fragML;
-    @BindView(R.id.rider_RV)
+    @BindView(R.id.rider_RV_accept)
     RecyclerView fragRecy;
+    @BindView(R.id.rider_RV_finish)
+    RecyclerView fragFinish;
     IRiderLoadListener riderLoadListener;
 
 
@@ -51,11 +53,13 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
     DatabaseReference EmployeeRef;
 
     public static final String fileName = "login";
-    public static final String Emp1 = "Employee_name1";
-    public static final String Emp2 = "Employee_name2";
+    public static final String Emp1 = "employee1";
+    public static final String Emp2 = "employee2";
     public static final String Emp3 = "Employee_name3";
 
     Button logout,datetoday;
+
+    Button accept,finish;
 
     String employeenumber;
 
@@ -75,6 +79,8 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
         employeeName = findViewById(R.id.employeeName);
         datetoday = findViewById(R.id.datePicker);
         totalsales = findViewById(R.id.totalsales);
+        accept = findViewById(R.id.btnRiderAccept);
+        finish = findViewById(R.id.btnRiderFinish);
 
         datetoday.setText(getTodaysDate());
 
@@ -103,14 +109,28 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragRecy.setVisibility(View.GONE);
+                fragFinish.setVisibility(View.VISIBLE);
+            }
+        });
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragRecy.setVisibility(View.VISIBLE);
+                fragFinish.setVisibility(View.GONE);
+            }
+        });
         if(sharedPreferences.contains(Emp1)){
 
 
             EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    employeenumber = snapshot.child("employees").child("Employee1").getKey();
-                    String Emp1_name = snapshot.child("employees").child("Employee1").child("name").getValue(String.class);
+                    employeenumber = snapshot.child("Employee1").getKey();
+                    String Emp1_name = snapshot.child("Employee1").child("name").getValue(String.class);
                     employeeName.setText(Emp1_name);
                     loadRiderFromFirebase();
                     loadHistoryFromFirebase();
@@ -129,8 +149,8 @@ public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadL
             EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    employeenumber = snapshot.child("employees").child("Employee2").getKey();
-                    String Emp2_name = snapshot.child("employees").child("Employee2").child("name").getValue(String.class);
+                    employeenumber = snapshot.child("Employee2").getKey();
+                    String Emp2_name = snapshot.child("Employee2").child("name").getValue(String.class);
                     employeeName.setText(Emp2_name);
                     loadRiderFromFirebase();
                     loadHistoryFromFirebase();

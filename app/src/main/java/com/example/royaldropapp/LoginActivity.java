@@ -56,9 +56,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String fileName = "login";
     public static final String Username = "username";
-    public static final String Rider1 = "ridername1";
-    public static final String Rider2 = "ridername2";
-    public static final String Rider3 = "ridername3";
+    public static final String Employee1 = "employee1";
+    public static final String Employee2 = "employee2";
     public static final String Password = "password";
 
 
@@ -301,23 +300,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                     }else{
-                        mAuth.signInWithEmailAndPassword(admine,userEnteredPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    SharedPreferences.Editor editor = sharedPreference.edit();
-                                    editor.putString(Username,userEnteredUsername);
-                                    editor.putString(Password,userEnteredPassword);
-                                    editor.apply();
-                                    finish();
-                                    Intent i = new Intent(getApplicationContext(),AdminActivity.class);
-                                    i.putExtra("NewPassword", userEnteredPassword);
-                                    startActivity(i);
-                                }else{
-                                    isRider();
-                                }
-                            }
-                        });
+                        isRider();
                     }
                 }catch (Exception e){
                     System.out.println(e);
@@ -334,32 +317,22 @@ public class LoginActivity extends AppCompatActivity {
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String rider1user = snapshot.child("Admin").child("riders").child("Rider1").child("username").getValue(String.class);
-                    String rider1pass = snapshot.child("Admin").child("riders").child("Rider1").child("password").getValue(String.class);
-                    String rider2user = snapshot.child("Admin").child("riders").child("Rider2").child("username").getValue(String.class);
-                    String rider2pass = snapshot.child("Admin").child("riders").child("Rider2").child("password").getValue(String.class);
-                    String rider3user = snapshot.child("Admin").child("riders").child("Rider3").child("username").getValue(String.class);
-                    String rider3pass = snapshot.child("Admin").child("riders").child("Rider3").child("password").getValue(String.class);
+                    String employee1user = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
+                    String employee1pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
+                    String employee2user = snapshot.child("Admin").child("employees").child("Employee2").child("username").getValue(String.class);
+                    String employee2pass = snapshot.child("Admin").child("employees").child("Employee2").child("password").getValue(String.class);
 
-                    if (rider1user.equals(userEnteredUsername)&&rider1pass.equals(userEnteredPassword)){
+                    if (employee1user.equals(userEnteredUsername)&&employee1pass.equals(userEnteredPassword)){
                         SharedPreferences.Editor editor = sharedPreference.edit();
-                        editor.putString(Rider1,userEnteredUsername);
+                        editor.putString(Employee1,userEnteredUsername);
                         editor.putString(Password,userEnteredPassword);
                         editor.apply();
                         finish();
                         Intent intent = new Intent(getApplicationContext(),AdminRiderActivity.class);
                         startActivity(intent);
-                    }else if(rider2user.equals(userEnteredUsername)&&rider2pass.equals(userEnteredPassword)){
+                    }else if(employee2user.equals(userEnteredUsername)&&employee2pass.equals(userEnteredPassword)){
                         SharedPreferences.Editor editor = sharedPreference.edit();
-                        editor.putString(Rider2,userEnteredUsername);
-                        editor.putString(Password,userEnteredPassword);
-                        editor.apply();
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(),AdminRiderActivity.class);
-                        startActivity(intent);
-                    }else if (rider3user.equals(userEnteredUsername)&&rider3pass.equals(userEnteredPassword)){
-                        SharedPreferences.Editor editor = sharedPreference.edit();
-                        editor.putString(Rider3,userEnteredUsername);
+                        editor.putString(Employee2,userEnteredUsername);
                         editor.putString(Password,userEnteredPassword);
                         editor.apply();
                         finish();

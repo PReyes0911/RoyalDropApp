@@ -18,42 +18,39 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/source_sans_pro"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="@string/employee"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/employeeName"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="90dp"
-            android:gravity="center"
+            android:gravity="center|start"
             android:hint="NAME"
             android:fontFamily="@font/source_sans_pro"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
 
         <Button
             android:id="@+id/logout_employee"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-             android:layout_marginTop="10dp"
-            android:layout_marginStart="25dp"
             android:gravity="center"
             android:background="@android:color/transparent"
             android:text="Logout"
             android:fontFamily="@font/source_sans_pro"
             android:textStyle="bold"
-             android:textSize="18sp"/>
+             android:textSize="15sp"/>
 
     </LinearLayout>
 
@@ -72,11 +69,46 @@
         android:padding="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rider_RV"
+            android:id="@+id/rider_RV_accept"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rider_RV_finish"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnRiderAccept"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Accept"/>
+
+        <Button
+            android:id="@+id/btnRiderFinish"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_blue"
+            android:layout_height="wrap_content"
+            android:text="Finish"/>
+    </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
