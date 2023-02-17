@@ -1,12 +1,5 @@
 package com.example.royaldropapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +12,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.royaldropapp.Adapter.MyCartAdapter;
 import com.example.royaldropapp.EventBus.MyUpdateCartEvent;
@@ -57,7 +57,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     @BindView(R.id.txtTotal)
     TextView txtTotal;
     @BindView(R.id.placeorder)
-    Button placeorders;
+    Button checkout;
     @BindView(R.id.cartempty)
     ImageView crtty;
     @BindView(R.id.emptycarts)
@@ -199,7 +199,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long pluscount = dataSnapshot.getChildrenCount();
-                placeorders.setText("Check Out (" + pluscount + ")");
+                checkout.setText("Check Out (" + pluscount + ")");
                 if(pluscount==0){
                     crtty.setVisibility(View.VISIBLE);
                     cty.setVisibility(View.VISIBLE);
@@ -240,7 +240,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                                 Double cost = Double.valueOf(cartModel.getTotalPrice());
                                 total = total + cost;
                                 txtTotal.setText(new StringBuilder("Total Price: ₱").append(String.format("%.2f", total)));
-                                placeorders.setEnabled(total != 0.0);
+                                checkout.setEnabled(total != 0.0);
                             }
                     }
 
@@ -297,7 +297,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
-        placeorders.setOnClickListener(new View.OnClickListener() {
+        checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int st5 = Integer.parseInt(stock5);
@@ -305,9 +305,8 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
                 int st7 = Integer.parseInt(stock7);
                 int st8 = Integer.parseInt(stock8);
                 if(st5>=CartQTY5&&st6>=CartQTY6&&st7>=CartQTY7&&st8>=CartQTY8){
-                    Intent intent = new Intent(getApplicationContext(),SummaryActivity.class);
+                    Intent intent = new Intent(CartActivity.this,SummaryActivity.class);
                     startActivity(intent);
-                    finish();
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }else{
                     Toast.makeText(CartActivity.this, "Some of your Item has Reach it Limit Please Check your Orders!", Toast.LENGTH_LONG).show();

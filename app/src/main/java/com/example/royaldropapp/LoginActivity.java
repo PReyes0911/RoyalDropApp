@@ -1,8 +1,5 @@
 package com.example.royaldropapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
@@ -21,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
     private Boolean validateUserName(){
         String val = email.getEditText().getText().toString();
         if(val.isEmpty()){
-            email.setError("Email is not Valid");
+            email.setError("Field cannot be empty");
             return false;
         }else{
             email.setError(null);
@@ -221,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
         if(val.isEmpty()){
             password.setError("Field cannot be empty");
             return false;
-        }else{
+        } else{
             password.setError(null);
             password.setErrorEnabled(false);
             return true;

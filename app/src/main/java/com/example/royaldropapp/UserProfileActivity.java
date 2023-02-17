@@ -3,13 +3,6 @@ package com.example.royaldropapp;
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationChannel;
@@ -33,6 +26,14 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.example.royaldropapp.Listener.ICartLoadListener;
 import com.example.royaldropapp.Listener.IPersonalOrderLoadListener;
@@ -282,10 +283,27 @@ public class UserProfileActivity extends AppCompatActivity implements IPersonalO
                 Intent intent = new Intent(UserProfileActivity.this, EditProfileActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                return true;
+                break;
+
+            case R.id.sendEmail:
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/html");
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"royaldrop2023@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT,"For Inquiry and Complaints");
+
+                try {
+                    startActivity(Intent.createChooser(i, "Please select email"));
+                }
+                catch (android.content.ActivityNotFoundException ex){
+                    Toast.makeText(UserProfileActivity.this, "There are no Email Clients", Toast.LENGTH_SHORT).show();
+                }
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     @Override

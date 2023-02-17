@@ -137,7 +137,67 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-    <FrameLayout
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/HKtextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/antic"
+                android:text="By clicking Register, you agree to our"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/termsCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/HKtextView"
+                android:text="Terms and Condition"
+                android:textStyle="bold|italic"
+                android:textSize="12sp"
+                android:textColor="@color/blue"/>
+
+            <TextView
+                android:id="@+id/andTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="and"
+                android:layout_marginTop="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/antic"/>
+            <TextView
+                android:id="@+id/privacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/andTextview"
+                android:text="Privacy Policy."
+                android:textStyle="bold|italic"
+                android:textSize="15sp"
+                android:textColor="@color/blue"
+                android:layout_marginTop="20dp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/emailConfirmTxtview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/antic"
+            android:text="You may receive email notifications for verification from us."
+            android:textSize="15sp"
+            android:textColor="@color/black" />
+
+        <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

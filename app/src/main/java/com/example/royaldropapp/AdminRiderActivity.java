@@ -1,11 +1,5 @@
 package com.example.royaldropapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.NotificationManager;
@@ -20,14 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.royaldropapp.Adapter.MyOnProcessAdapter;
-import com.example.royaldropapp.Adapter.MyOrderAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.royaldropapp.Adapter.MyRiderAdapter;
-import com.example.royaldropapp.Listener.IDeliverLoadListener;
-import com.example.royaldropapp.Listener.IProductLoadListener;
 import com.example.royaldropapp.Listener.IRiderLoadListener;
-import com.example.royaldropapp.Model.DeliverModel;
-import com.example.royaldropapp.Model.ProductModel;
 import com.example.royaldropapp.Model.RiderModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -43,18 +37,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdminRiderActivity extends AppCompatActivity implements IProductLoadListener, IDeliverLoadListener  {
+public class AdminRiderActivity extends AppCompatActivity implements IRiderLoadListener {
 
     @BindView(R.id.rider_RL)
     RelativeLayout fragML;
     @BindView(R.id.rider_RV_accept)
     RecyclerView fragRecy;
     @BindView(R.id.rider_RV_finish)
-    RecyclerView fragFinish;
+    RecyclerView fragFinsih;
     IRiderLoadListener riderLoadListener;
-
-    IProductLoadListener productLoadListener;
-    IDeliverLoadListener deliverLoadListener;
 
 
     SharedPreferences sharedPreferences;
@@ -62,13 +53,11 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
     DatabaseReference EmployeeRef;
 
     public static final String fileName = "login";
-    public static final String Emp1 = "employee1";
-    public static final String Emp2 = "employee2";
+    public static final String Emp1 = "Employee_name1";
+    public static final String Emp2 = "Employee_name2";
     public static final String Emp3 = "Employee_name3";
 
     Button logout,datetoday;
-
-    Button accept,finish;
 
     String employeenumber;
 
@@ -88,8 +77,6 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
         employeeName = findViewById(R.id.employeeName);
         datetoday = findViewById(R.id.datePicker);
         totalsales = findViewById(R.id.totalsales);
-        accept = findViewById(R.id.btnRiderAccept);
-        finish = findViewById(R.id.btnRiderFinish);
 
         datetoday.setText(getTodaysDate());
 
@@ -118,31 +105,16 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragRecy.setVisibility(View.VISIBLE);
-                fragFinish.setVisibility(View.GONE);
-            }
-        });
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragRecy.setVisibility(View.GONE);
-                fragFinish.setVisibility(View.VISIBLE);
-            }
-        });
         if(sharedPreferences.contains(Emp1)){
 
 
             EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    employeenumber = snapshot.child("Employee1").getKey();
-                    String Emp1_name = snapshot.child("Employee1").child("name").getValue(String.class);
+                    employeenumber = snapshot.child("employees").child("Employee1").getKey();
+                    String Emp1_name = snapshot.child("employees").child("Employee1").child("name").getValue(String.class);
                     employeeName.setText(Emp1_name);
-                    loadOrderFromFirebase();
-                    loadDeliverFromFirebase();
+                    loadRiderFromFirebase();
                     loadHistoryFromFirebase();
 
                 }
@@ -159,11 +131,10 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
             EmployeeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    employeenumber = snapshot.child("Employee2").getKey();
-                    String Emp2_name = snapshot.child("Employee2").child("name").getValue(String.class);
+                    employeenumber = snapshot.child("employees").child("Employee2").getKey();
+                    String Emp2_name = snapshot.child("employees").child("Employee2").child("name").getValue(String.class);
                     employeeName.setText(Emp2_name);
-                    loadOrderFromFirebase();
-                    loadDeliverFromFirebase();
+                    loadRiderFromFirebase();
                     loadHistoryFromFirebase();
                 }
 
@@ -181,7 +152,7 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
                     employeenumber = snapshot.child("employees").child("Employee3").getKey();
                     String Emp3_name = snapshot.child("employees").child("Employee3").child("name").getValue(String.class);
                     employeeName.setText(Emp3_name);
-                    loadOrderFromFirebase();
+                    loadRiderFromFirebase();
                     loadHistoryFromFirebase();
                 }
 
@@ -192,7 +163,6 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
             });
         }
         init();
-        init2();
         initDatePicker();
 
     }
@@ -224,82 +194,15 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
                     }
                 });
     }
-    private void loadOrderFromFirebase(){
-        List<ProductModel> productModels = new ArrayList<>();
-        FirebaseDatabase.getInstance()
-                .getReference("Orders")
-                .child(getTodaysDate())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
-                            for(DataSnapshot productsnapshot:snapshot.getChildren())
-                            {
-                                ProductModel productModel = productsnapshot.getValue(ProductModel.class);
-                                productModel.setKey(productsnapshot.getKey());
-                                productModel.setTotalPrice(productModel.getTotalPrice());
-                                productModels.add(productModel);
-                            }
-                            productLoadListener.onProductLoadSuccess(productModels);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        productLoadListener.onProductLoadFailed(error.getMessage());
-
-                    }
-                });
-    }
-    private void loadDeliverFromFirebase(){
-        List<DeliverModel> deliverModels = new ArrayList<>();
-        FirebaseDatabase.getInstance()
-                .getReference("Delivered")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
-                            for(DataSnapshot deliversnapshot:snapshot.getChildren())
-                            {
-                                DeliverModel deliverModel = deliversnapshot.getValue(DeliverModel.class);
-                                deliverModel.setKey(deliversnapshot.getKey());
-                                deliverModel.setTotalPrice(deliverModel.getTotalPrice());
-                                deliverModels.add(deliverModel);
-                            }
-                            deliverLoadListener.onDeliverLoadSuccess(deliverModels);
-                        }else{
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        deliverLoadListener.onDeliverLoadFailed(error.getMessage());
-
-                    }
-                });
-    }
     private void init(){
         ButterKnife.bind(this);
 
-        productLoadListener = this;
-        deliverLoadListener = this;
+        riderLoadListener = this;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         fragRecy.setLayoutManager(layoutManager);
         fragRecy.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
-    }
-    private void init2(){
-        ButterKnife.bind(this);
-
-        deliverLoadListener = this;
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-        fragFinish.setLayoutManager(layoutManager);
-        fragFinish.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
     }
 
 
@@ -396,31 +299,18 @@ public class AdminRiderActivity extends AppCompatActivity implements IProductLoa
     }
 
 
-    @Override
-    public void onDeliverLoadSuccess(List<DeliverModel> deliverModelList) {
-
-        MyOnProcessAdapter adapter = new MyOnProcessAdapter(getApplicationContext(),deliverModelList);
-        fragFinish.setAdapter(adapter);
-
-    }
 
     @Override
-    public void onDeliverLoadFailed(String message) {
+    public void onRiderLoadSuccess(List<RiderModel> riderModelList) {
 
-        Snackbar.make(fragML,message,Snackbar.LENGTH_LONG).show();
-
-    }
-
-    @Override
-    public void onProductLoadSuccess(List<ProductModel> productModelList) {
-        MyOrderAdapter adapter = new MyOrderAdapter(getApplicationContext(),productModelList,deliverLoadListener);
+        MyRiderAdapter adapter = new MyRiderAdapter(this,riderModelList);
         fragRecy.setAdapter(adapter);
 
     }
 
     @Override
-    public void onProductLoadFailed(String message) {
+    public void onRiderLoadFailed(String message) {
+
         Snackbar.make(fragML,message,Snackbar.LENGTH_LONG).show();
     }
-
 }

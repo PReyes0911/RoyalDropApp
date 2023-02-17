@@ -1,11 +1,5 @@
 package com.example.royaldropapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -22,6 +16,12 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.royaldropapp.Adapter.MySummaryAdapter;
 import com.example.royaldropapp.Listener.ICartLoadListener;
@@ -456,12 +456,12 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                                                 reffUser.child(String.valueOf(usermaxid + 1)).child("uid").setValue(currentuser);
                                                 order.child("Users").child(currentuser).child("OrderHistory").child(String.valueOf(usermaxid + 1)).setValue(productModel);
                                                 order.child("Users").child(currentuser).child("OrderHistory").child(String.valueOf(usermaxid + 1)).child("orderdate").setValue(getTodaysDate());
-                                                // FirebaseDatabase.getInstance().getReference("Users")
-                                                //        .child(currentuser)
+                                                //FirebaseDatabase.getInstance().getReference("Users")
+                                               //         .child(currentuser)
                                                 //        .child("Notifications")
-                                                 //       .push().setValue(new Notification(
-                                                //                "Order Placed",
-                                                //                "New order has been placed"
+                                                //       .push().setValue(new Notification(
+                                               //                 "Order Placed",
+                                                //              "New order has been placed"
                                                 //        ));
                                                 snapshot.getRef().removeValue();
 

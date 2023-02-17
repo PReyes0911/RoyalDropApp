@@ -1,8 +1,5 @@
 package com.example.royaldropapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -181,9 +181,9 @@ public class RiderActivity extends AppCompatActivity {
                         EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
-                                String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
-                                String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
+                                String Emp1_name = snapshot.child("employees").child("Employee1").child("name").getValue(String.class);
+                                String Emp1_username = snapshot.child("employees").child("Employee1").child("username").getValue(String.class);
+                                String Emp1_pass = snapshot.child("employees").child("Employee1").child("password").getValue(String.class);
                                 btnok.setEnabled(!name1.getEditText().getText().toString().equals(Emp1_name) || !username1.getEditText().getText().toString().equals(Emp1_username) || !password1.getEditText().getText().toString().equals(Emp1_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));
@@ -217,9 +217,9 @@ public class RiderActivity extends AppCompatActivity {
                         EmployeeReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String Emp1_name = snapshot.child("Admin").child("employees").child("Employee1").child("name").getValue(String.class);
-                                String Emp1_username = snapshot.child("Admin").child("employees").child("Employee1").child("username").getValue(String.class);
-                                String Emp1_pass = snapshot.child("Admin").child("employees").child("Employee1").child("password").getValue(String.class);
+                                String Emp1_name = snapshot.child("employees").child("Employee1").child("name").getValue(String.class);
+                                String Emp1_username = snapshot.child("employees").child("Employee1").child("username").getValue(String.class);
+                                String Emp1_pass = snapshot.child("employees").child("Employee1").child("password").getValue(String.class);
                                 btnok.setEnabled(!name1.getEditText().getText().toString().equals(Emp1_name) || !username1.getEditText().getText().toString().equals(Emp1_username) || !password1.getEditText().getText().toString().equals(Emp1_pass));
                                 if (btnok.isEnabled()){
                                     btnok.setBackgroundColor(Color.parseColor("#00FF00"));

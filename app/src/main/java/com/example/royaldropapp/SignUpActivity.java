@@ -1,8 +1,5 @@
 package com.example.royaldropapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +10,15 @@ import android.net.Network;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.royaldropapp.Model.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     Button callLogin,register_btn;
     ImageView image;
-    TextView logoText,sloganText;
+    TextView logoText,sloganText,termsCondition,privacy;
     TextInputLayout regName,regHomeAddress,regemail,regPhoneNo,regpassword,regRetypePass;
     ProgressBar progressBar;
 
@@ -44,12 +45,16 @@ public class SignUpActivity extends AppCompatActivity {
     Dialog dialog;
     ConnectivityManager connectivityManager;
 
+    WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
 
+        termsCondition = findViewById(R.id.termsCondition);
+        privacy = findViewById(R.id.privacyPolicy);
         callLogin = findViewById(R.id.loginbtn_screen);
         image = findViewById(R.id.llogo_image);
         logoText = findViewById(R.id.llogo_name);
@@ -65,7 +70,28 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         dialog=new Dialog(this);
 
-        callLogin.setOnClickListener(v -> super.onBackPressed());
+        callLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        termsCondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUpActivity.this, TermsCondition.class);
+                startActivity(intent);
+            }
+        });
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUpActivity.this, Privacy.class);
+                startActivity(intent);
+            }
+        });
+
 
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override

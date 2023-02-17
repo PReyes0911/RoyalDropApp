@@ -1,5 +1,8 @@
 package com.example.royaldropapp;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
@@ -28,20 +31,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
 import com.example.royaldropapp.Model.HistoryModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GeneratePDFActivity extends AppCompatActivity {
 
@@ -58,7 +58,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
     TextView qty5,total5;
     TextView qty6,total6;
     TextView qty7,total7;
-    TextView qty8,total8;
+
 
     TableRow tb1,tb2,tb3,tb4,tb5,tb6,tb7,tb8;
 
@@ -106,8 +106,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
         total6 = findViewById(R.id.total6);
         qty7 = findViewById(R.id.qty7);
         total7 = findViewById(R.id.total7);
-        qty8 = findViewById(R.id.qty8);
-        total8 = findViewById(R.id.total8);
         overall = findViewById(R.id.overalltotal);
         tb1 = findViewById(R.id.table1);
         tb2 = findViewById(R.id.table2);
@@ -116,7 +114,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
         tb5 = findViewById(R.id.table5);
         tb6 = findViewById(R.id.table6);
         tb7 = findViewById(R.id.table7);
-        tb8 = findViewById(R.id.table8);
+
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.header);
         scaledbmp = Bitmap.createScaledBitmap(bmp, 1200, 518, false);
 
@@ -138,7 +136,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -209,18 +206,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }catch (NumberFormatException nfe){
                             Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
                         }
-
-                    }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
-
 
                     }
                     overall.setText("₱"+String.format("%.2f",total));
@@ -233,7 +218,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -306,18 +290,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill/New")){
@@ -328,7 +301,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -401,18 +373,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -423,7 +384,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -496,18 +456,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -518,7 +467,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -589,18 +538,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }catch (NumberFormatException nfe){
                             Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
                         }
-
-                    }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
-
 
                     }
                     overall.setText("₱"+String.format("%.2f",total));
@@ -613,7 +550,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -686,18 +623,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -708,7 +634,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -781,18 +707,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -803,7 +718,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -876,18 +791,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -898,7 +802,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -971,18 +874,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -993,7 +885,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1066,18 +958,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -1088,7 +969,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1161,18 +1042,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -1183,7 +1053,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1256,18 +1126,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -1278,7 +1137,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1351,18 +1210,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -1373,7 +1221,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1446,18 +1294,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -1468,7 +1305,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1541,18 +1378,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -1563,7 +1389,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1636,18 +1462,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -1658,7 +1473,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1731,18 +1546,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -1753,7 +1557,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1826,18 +1630,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -1848,7 +1641,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -1921,18 +1714,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -1943,7 +1725,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2016,18 +1798,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -2038,7 +1809,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2111,18 +1882,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -2133,7 +1893,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2206,18 +1966,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -2228,7 +1977,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2301,18 +2050,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -2323,7 +2061,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2396,18 +2134,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -2418,7 +2145,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2491,18 +2218,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -2513,7 +2229,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2586,18 +2302,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -2608,7 +2313,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2681,18 +2386,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
 
@@ -2722,7 +2416,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2795,18 +2489,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill/New")){
@@ -2817,7 +2500,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2890,18 +2573,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill/New")){
@@ -2912,7 +2584,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -2985,18 +2656,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -3007,7 +2667,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3080,18 +2740,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -3102,7 +2751,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3175,18 +2824,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -3197,7 +2835,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3270,18 +2908,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -3292,7 +2919,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3365,18 +2992,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -3387,7 +3003,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3460,18 +3076,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -3482,7 +3087,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3555,18 +3160,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -3577,7 +3171,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3650,18 +3244,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -3672,7 +3255,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3745,18 +3328,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -3767,7 +3339,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3840,18 +3412,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -3862,7 +3423,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -3935,18 +3496,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -3957,7 +3507,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4030,18 +3580,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -4052,7 +3591,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4125,18 +3664,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -4147,7 +3675,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4220,18 +3748,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -4242,7 +3759,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4315,18 +3832,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -4337,7 +3843,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4410,18 +3916,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -4432,7 +3927,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4505,18 +4000,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -4527,7 +4011,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4600,18 +4084,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -4622,7 +4095,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4695,18 +4168,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -4717,7 +4179,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4790,18 +4252,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -4812,7 +4263,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4885,18 +4336,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -4907,7 +4347,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -4980,18 +4420,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -5002,7 +4431,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5075,18 +4504,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -5097,7 +4515,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5170,18 +4588,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -5192,7 +4599,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5265,18 +4672,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -5287,7 +4683,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5360,18 +4756,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -5382,7 +4767,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5455,18 +4840,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -5477,7 +4851,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5550,18 +4924,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -5572,7 +4935,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5645,18 +5008,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
 
@@ -5686,7 +5038,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5759,18 +5111,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill/New")){
@@ -5781,7 +5122,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5854,18 +5195,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill/New")){
@@ -5876,7 +5206,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -5949,18 +5279,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -5971,7 +5290,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6044,18 +5363,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -6066,7 +5374,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6139,18 +5447,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -6161,7 +5458,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6234,18 +5531,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -6256,7 +5542,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6329,18 +5615,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -6351,7 +5626,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6424,18 +5699,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show Refill/New")){
@@ -6446,7 +5710,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6519,18 +5783,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -6541,7 +5794,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6614,18 +5867,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill/New")){
@@ -6636,7 +5878,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6709,18 +5951,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -6731,7 +5962,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6804,18 +6035,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -6826,7 +6046,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6899,18 +6119,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -6921,7 +6130,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -6994,18 +6203,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -7016,7 +6214,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7089,18 +6287,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -7111,7 +6298,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7184,18 +6371,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -7206,7 +6382,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7279,18 +6455,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -7301,7 +6466,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7374,18 +6539,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -7396,7 +6550,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7469,18 +6623,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show Refill")){
@@ -7491,7 +6634,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7564,18 +6707,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show Refill")){
@@ -7586,7 +6718,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7659,18 +6791,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Round")&&text3.equals("Show New")){
@@ -7681,7 +6802,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7754,18 +6875,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral/Alkaline")&&text2.equals("Show Slim")&&text3.equals("Show New")){
@@ -7776,7 +6886,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7849,18 +6959,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -7871,7 +6970,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -7944,18 +7043,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show Refill")){
@@ -7966,7 +7054,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -8039,18 +7127,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Mineral Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -8061,7 +7138,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.VISIBLE);
                     tb6.setVisibility(View.GONE);
                     tb7.setVisibility(View.VISIBLE);
-                    tb8.setVisibility(View.GONE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -8134,18 +7211,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
                 else if(text1.equals("Show Alkaline Water")&&text2.equals("Show Round/Slim")&&text3.equals("Show New")){
@@ -8156,7 +7222,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     tb5.setVisibility(View.GONE);
                     tb6.setVisibility(View.VISIBLE);
                     tb7.setVisibility(View.GONE);
-                    tb8.setVisibility(View.VISIBLE);
+
                     double total = 0;
                     if(tb1.isShown()){
                         String t1 = String.valueOf(total1.getText());
@@ -8229,18 +7295,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                         }
 
                     }
-                    if(tb8.isShown()){
-                        String t8 = String.valueOf(total8.getText());
-                        t8 = t8.replaceAll("[^\\d.]", "");
-                        try {
-                            double tt8 = Double.parseDouble(t8);
-                            total = total +tt8;
-                        }catch (NumberFormatException nfe){
-                            Toast.makeText(GeneratePDFActivity.this, nfe.toString().trim(), Toast.LENGTH_SHORT).show();
-                        }
 
-
-                    }
                     overall.setText("₱"+String.format("%.2f",total));
                 }
 
@@ -8293,7 +7348,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
         Qty5Total();
         Qty6Total();
         Qty7Total();
-        Qty8Total();
+
 
         TotalSales();
 
@@ -8408,15 +7463,6 @@ public class GeneratePDFActivity extends AppCompatActivity {
             paint.setTextAlign(Paint.Align.LEFT);
         }
 
-        if(tb8.isShown()){
-            canvas.drawText("8.",40,1650,paint);
-            canvas.drawText("Alkaline Water - NEW",200,1650,paint);
-            canvas.drawText("Slim Gallon",200,1700,paint);
-            canvas.drawText("₱235",700,1650,paint);
-            canvas.drawText(qty8.getText().toString(),900,1650,paint);
-            canvas.drawText(total8.getText().toString(),1000,1650,paint);
-            paint.setTextAlign(Paint.Align.LEFT);
-        }
 
 
         canvas.drawText("Total: ",850,1800,paint);
@@ -8671,32 +7717,7 @@ public class GeneratePDFActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void Qty8Total(){
-        List<HistoryModel> historyModels = new ArrayList<>();
-        FirebaseDatabase.getInstance()
-                .getReference("Finish")
-                .child(date.getText().toString().trim())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        historyModels.clear();
-                        Integer quantity1 = 0;
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            HistoryModel historyModel = ds.getValue(HistoryModel.class);
-                            Integer cost = Integer.valueOf(historyModel.getQty8());
-                            quantity1 += cost;
-                            qty8.setText(String.valueOf(quantity1));
-                            total8.setText("₱"+235*quantity1+".00");
 
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
     private void TotalSales(){
         List<HistoryModel> historyModels = new ArrayList<>();
         FirebaseDatabase.getInstance()

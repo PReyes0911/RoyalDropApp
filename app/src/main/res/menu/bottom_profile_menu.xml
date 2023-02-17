@@ -5,6 +5,13 @@
     <item
         android:id="@+id/profile_editProfile"
         android:title="Edit Profile"
-        app:showAsAction="never"/>
+        app:showAsAction="never"
+        android:icon="@drawable/edit"/>
+    <item
+        android:id="@+id/sendEmail"
+        android:title="Send Email"
+        app:showAsAction="never"
+        android:icon="@drawable/send_email"/>
+
 
 </menu>
