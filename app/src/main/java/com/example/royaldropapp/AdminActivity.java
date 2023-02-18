@@ -3,6 +3,20 @@ package com.example.royaldropapp;
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -16,22 +30,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-
-import android.os.PersistableBundle;
-import android.view.MenuItem;
-
 
 import com.example.royaldropapp.Model.PersonalOrderModel;
 import com.example.royaldropapp.databinding.ActivityAdminBinding;
@@ -48,7 +46,6 @@ import java.util.Calendar;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ActivityAdminBinding binding;
     DatabaseReference reff,passupdate,deletepreviewsorders;
     private DrawerLayout drawerLayout;
     long maxid = 0;
@@ -66,9 +63,8 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAdminBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        replaceFragment(new fragment1());
+        setContentView(R.layout.activity_employee);
+        replaceFragment(new AdminProfileFragment());
         onNewIntent(getIntent());
 
         Toolbar toolbar = findViewById(R.id.admin_toolbar);
@@ -106,255 +102,6 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         });
         passupdate = FirebaseDatabase.getInstance().getReference();
         deletepreviewsorders = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Data");
-        reference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-                    NotificationManager manager = getSystemService(NotificationManager.class);
-                    manager.createNotificationChannel(channel);
-                }
-
-                try {
-                    Intent resultIntent = new Intent(getApplicationContext(), AdminActivity.class);
-                    PendingIntent pendingIntent=PendingIntent.getActivity(AdminActivity.this,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(AdminActivity.this, "My Notification");
-                    builder.setContentTitle("New Order has been Placed");
-                    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round));
-                    builder.setSmallIcon(R.mipmap.ic_launcher_round);
-                    builder.setContentIntent(pendingIntent);
-                    builder.setAutoCancel(true);
-                    builder.setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE);
-                    builder.setStyle(new NotificationCompat.BigTextStyle());
-
-                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    builder.setSound(alarmSound);
-
-                    NotificationManagerCompat manager = NotificationManagerCompat.from(AdminActivity.this);
-                    manager.notify(0, builder.build());
-                    replaceFragment(new fragment1());
-
-                } catch (IllegalStateException exception) {
-
-                    System.out.println(exception);
-
-                }
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("Orders").child(getTodaysDate());
-        reference2.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                try{
-                    replaceFragment(new fragment1());
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                try{
-                    replaceFragment(new fragment1());
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        DatabaseReference Drinks = FirebaseDatabase.getInstance().getReference().child("Drink");
-        Drinks.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                try{
-                    replaceFragment(new AdminProductPriceFragment());
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                try{
-                    replaceFragment(new AdminProductPriceFragment());
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        DatabaseReference NewDrinks = FirebaseDatabase.getInstance().getReference().child("NewDrink");
-        NewDrinks.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                try{
-                    replaceFragment(new AdminProductPriceFragment());
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                try{
-                    replaceFragment(new AdminProductPriceFragment());
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("Delivered");
-        reference3.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-                    NotificationManager manager = getSystemService(NotificationManager.class);
-                    manager.createNotificationChannel(channel);
-                }
-
-                try {
-                    Intent resultIntent = new Intent(getApplicationContext(), AdminActivity.class);
-                    resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    resultIntent.putExtra("AHistoryFragment", "MyFragment");
-                    PendingIntent pendingIntent=PendingIntent.getActivity(AdminActivity.this,0,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(AdminActivity.this, "My Notification");
-                    builder.setContentTitle("The Customer has received the Gallon");
-                    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round));
-                    builder.setSmallIcon(R.mipmap.ic_launcher_round);
-                    builder.setContentIntent(pendingIntent);
-                    builder.setAutoCancel(true);
-                    builder.setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE);
-                    builder.setStyle(new NotificationCompat.BigTextStyle());
-                    builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-
-                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    builder.setSound(alarmSound);
-
-                    NotificationManagerCompat manager = NotificationManagerCompat.from(AdminActivity.this);
-                    manager.notify(0, builder.build());
-                    replaceFragment(new fragment2());
-
-
-
-                } catch (IllegalStateException exception) {
-
-                    System.out.println(exception);
-
-                }
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-
-            switch (item.getItemId()){
-
-                case R.id.orderz:
-                    replaceFragment(new fragment1());
-                    break;
-                case R.id.deliver:
-                    replaceFragment(new fragment2());
-                    break;
-            }
-
-            return true;
-        });
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -377,7 +124,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 editor.clear();
                 editor.commit();
                 FirebaseAuth.getInstance().signOut();
-                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 nMgr.cancelAll();
                 startActivity(i);
@@ -419,21 +166,6 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onResume() {
-
-        deletepreviewsorders.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                deletepreviewsorders.child("Orders").child(getYesterDate()).removeValue();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         onNewIntent(getIntent());
         String newpassword = getIntent().getStringExtra("NewPassword");
         if(newpassword==null){

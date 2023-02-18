@@ -30,7 +30,7 @@
             android:name=".RiderActivity"
             android:exported="false"
             android:label=""
-            android:parentActivityName=".AdminActivity"
+            android:parentActivityName=".EmployeeActivity"
             android:theme="@style/Theme.RoyalDrop.NoActionBar" />
 
         <provider
@@ -47,7 +47,7 @@
             android:name=".GeneratePDFActivity"
             android:exported="false"
             android:label=""
-            android:parentActivityName=".AdminActivity"
+            android:parentActivityName=".EmployeeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
         <activity
             android:name=".Privacy"
@@ -69,6 +69,13 @@
             android:launchMode="singleTop"
             android:noHistory="true"
             android:exported="false" />
+        <activity
+            android:name=".EmployeeActivity"
+            android:clearTaskOnLaunch="true"
+            android:exported="false"
+            android:label=""
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.RoyalDrop.NoActionBar" />
         <activity
             android:name=".AdminActivity"
             android:clearTaskOnLaunch="true"

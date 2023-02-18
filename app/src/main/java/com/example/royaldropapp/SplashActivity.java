@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Pair;
@@ -15,7 +14,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -83,12 +81,12 @@ public class SplashActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 sharedPreference = getSharedPreferences(fileName, Context.MODE_PRIVATE);
                 if(sharedPreference.contains(Username)){
-                    Intent i = new Intent(getApplicationContext(),AdminActivity.class);
+                    Intent i = new Intent(getApplicationContext(), AdminActivity.class);
                     startActivity(i);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }else if(sharedPreference.contains(Employee1)||sharedPreference.contains(Employee2)) {
-                    Intent i = new Intent(getApplicationContext(),AdminRiderActivity.class);
+                    Intent i = new Intent(getApplicationContext(),EmployeeActivity.class);
                     startActivity(i);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();

@@ -291,7 +291,7 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString(Password,userEnteredPassword);
                                     editor.apply();
                                     finish();
-                                    Intent i = new Intent(getApplicationContext(),AdminActivity.class);
+                                    Intent i = new Intent(getApplicationContext(), AdminActivity.class);
                                     i.putExtra("NewPassword", userEnteredPassword);
                                     startActivity(i);
                                 }else{
@@ -328,7 +328,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString(Password,userEnteredPassword);
                         editor.apply();
                         finish();
-                        Intent intent = new Intent(getApplicationContext(),AdminRiderActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), EmployeeActivity.class);
                         startActivity(intent);
                     }else if(employee2user.equals(userEnteredUsername)&&employee2pass.equals(userEnteredPassword)){
                         SharedPreferences.Editor editor = sharedPreference.edit();
@@ -336,7 +336,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString(Password,userEnteredPassword);
                         editor.apply();
                         finish();
-                        Intent intent = new Intent(getApplicationContext(),AdminRiderActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), EmployeeActivity.class);
                         startActivity(intent);
                     }else{
                         isUser();
