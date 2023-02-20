@@ -75,7 +75,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
     public void onBindViewHolder(@NonNull MyOrderHolder holder, int position) {
 
         deliverModel = new DeliverModel();
-        dialog = new Dialog(context.getApplicationContext());
+        dialog = new Dialog(context);
 
         reff = FirebaseDatabase.getInstance().getReference().child("Cancel").child(getTodaysDate());
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
