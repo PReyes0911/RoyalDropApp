@@ -56,7 +56,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyCartView
         Glide.with(context)
                 .load(cartModelList.get(position).getImage())
                 .into(holder.imageView);
-        holder.txtPrice.setText(new StringBuilder("Price: ₱").append(cartModelList.get(position).getPrice()).append(".00"));
+        holder.txtPrice.setText(new StringBuilder("Price: ₱").append(cartModelList.get(position).getPrice()));
         holder.txtName.setText(new StringBuilder().append(cartModelList.get(position).getName()));
         holder.txtQuantity.setText(new StringBuilder().append(cartModelList.get(position).getQuantity() ));
         holder.txtTotal.setText(new StringBuilder("₱").append(cartModelList.get(position).getTotalPrice() ));

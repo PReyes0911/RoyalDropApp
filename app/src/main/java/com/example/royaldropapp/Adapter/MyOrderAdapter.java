@@ -53,7 +53,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
     private List<ProductModel> productModelList;
     private IDeliverLoadListener iDeliverLoadListener;
 
-    String stock5,stock6,stock7,stock8;
+    String stock5,stock6,stock7,stock8,stock9,stock10,stock11;
 
 
     public MyOrderAdapter(Context context, List<ProductModel> productModelList, IDeliverLoadListener iDeliverLoadListener) {
@@ -100,6 +100,9 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
                 stock6 = snapshot.child("06").child("stocks").getValue(String.class);
                 stock7 = snapshot.child("07").child("stocks").getValue(String.class);
                 stock8 = snapshot.child("08").child("stocks").getValue(String.class);
+                stock9 = snapshot.child("09").child("stocks").getValue(String.class);
+                stock10 = snapshot.child("10").child("stocks").getValue(String.class);
+                stock11 = snapshot.child("11").child("stocks").getValue(String.class);
             }
 
             @Override
@@ -477,7 +480,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
 
             Button btnok = dialog.findViewById(R.id.btn_okay2);
             Button notyet = dialog.findViewById(R.id.btn_notyet);
-            TextView N1, N2, N3, N4, N5, N6, N7, N8, Name, Address, phone;
+            TextView N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, Name, Address, phone;
             N1 = dialog.findViewById(R.id.txtName1);
             N2 = dialog.findViewById(R.id.txtName2);
             N3 = dialog.findViewById(R.id.txtName3);
@@ -486,6 +489,9 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
             N6 = dialog.findViewById(R.id.txtName6);
             N7 = dialog.findViewById(R.id.txtName7);
             N8 = dialog.findViewById(R.id.txtName8);
+            N9 = dialog.findViewById(R.id.txtName8);
+            N10 = dialog.findViewById(R.id.txtName8);
+            N11 = dialog.findViewById(R.id.txtName8);
             // count = dialog.findViewById(R.id.txtcountdown);
             Name = dialog.findViewById(R.id.txtCustomerName);
             Address = dialog.findViewById(R.id.txtAddressDialog);
@@ -534,6 +540,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
                 N8.setVisibility(View.GONE);
             } else {
                 N8.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName8()).append(" x").append(productModelList.get(position).getQty8()));
+            }
+            if (productModelList.get(holder.getAdapterPosition()).getName9() == null) {
+                N9.setVisibility(View.GONE);
+            } else {
+                N9.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName9()).append(" x").append(productModelList.get(position).getQty9()));
             }
             btnok.setOnClickListener(view14 -> new CountDownTimer(3000, 1000) {
                 @Override
@@ -861,6 +872,12 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
+        @BindView(R.id.txtName9)
+        TextView txtN9;
+        @BindView(R.id.txtName10)
+        TextView txtN10;
+        @BindView(R.id.txtName11)
+        TextView txtN11;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
         @BindView(R.id.txtTotalOrderPrice)

@@ -61,7 +61,7 @@ public class MyDrinkAdapter extends RecyclerView.Adapter<MyDrinkAdapter.MyDrinkV
         Glide.with(context)
                 .load(drinkModelList.get(position).getImage())
                 .into(holder.imageView);
-        holder.txtPrice.setText(new StringBuilder("₱").append(drinkModelList.get(position).getPrice()).append(".00"));
+        holder.txtPrice.setText(new StringBuilder("₱").append(drinkModelList.get(position).getPrice()));
         holder.txtName.setText(new StringBuilder().append(drinkModelList.get(position).getName()));
         holder.txtStock.setText(new StringBuilder("Stock: ").append(drinkModelList.get(position).getStocks()));
 

@@ -75,7 +75,7 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
 
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    String stock5,stock6,stock7,stock8;
+    String stock5,stock6,stock7,stock8,stock9,stock10,stock11;
 
     @BindView(R.id.mainLayout3)
     RelativeLayout summaryML;
@@ -147,6 +147,9 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                 stock6 = snapshot.child("06").child("stocks").getValue(String.class);
                 stock7 = snapshot.child("07").child("stocks").getValue(String.class);
                 stock8 = snapshot.child("08").child("stocks").getValue(String.class);
+                stock9 = snapshot.child("09").child("stocks").getValue(String.class);
+                stock10 = snapshot.child("10").child("stocks").getValue(String.class);
+                stock11 = snapshot.child("11").child("stocks").getValue(String.class);
             }
 
             @Override
@@ -234,7 +237,7 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
 
                     Button btnok = dialog.findViewById(R.id.btnOK);
                     Button notyet = dialog.findViewById(R.id.btnNO);
-                    TextView N1,N2,N3,N4,N5,N6,N7,N8,Address;
+                    TextView N1,N2,N3,N4,N5,N6,N7,N8,N9,N10,N11,Address;
                     N1 = dialog.findViewById(R.id.Name1);
                     N2 = dialog.findViewById(R.id.Name2);
                     N3 = dialog.findViewById(R.id.Name3);
@@ -243,6 +246,9 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                     N6 = dialog.findViewById(R.id.Name6);
                     N7 = dialog.findViewById(R.id.Name7);
                     N8 = dialog.findViewById(R.id.Name8);
+                    N9 = dialog.findViewById(R.id.Name9);
+                    N10 = dialog.findViewById(R.id.Name10);
+                    N11 = dialog.findViewById(R.id.Name11);
                     Address = dialog.findViewById(R.id.txtPlaceAddress);
 
                     Address.setText("Address: " +DeliveryAdd.getText().toString());
@@ -252,8 +258,8 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            String name1,name2,name3,name4,name5,name6,name7,name8;
-                            int quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8;
+                            String name1,name2,name3,name4,name5,name6,name7,name8,name9,name10,name11;
+                            int quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8,quantity9,quantity10,quantity11;
 
                             if(snapshot.child("01").child("quantity").getValue()==null&&snapshot.child("01").child("name").getValue()==null){
                                 N1.setVisibility(View.GONE);
@@ -311,6 +317,27 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                                 quantity8 = Integer.parseInt(snapshot.child("08").child("quantity").getValue().toString());
                                 N8.setText(name8+" x " + quantity8);
                             }
+                            if(snapshot.child("09").child("quantity").getValue()==null&&snapshot.child("09").child("name").getValue()==null){
+                                N9.setVisibility(View.GONE);
+                            }else{
+                                name9 = snapshot.child("09").child("name").getValue(String.class);
+                                quantity9 = Integer.parseInt(snapshot.child("09").child("quantity").getValue().toString());
+                                N9.setText(name9+" x " + quantity9);
+                            }
+                            if(snapshot.child("10").child("quantity").getValue()==null&&snapshot.child("10").child("name").getValue()==null){
+                                N10.setVisibility(View.GONE);
+                            }else{
+                                name10 = snapshot.child("10").child("name").getValue(String.class);
+                                quantity10 = Integer.parseInt(snapshot.child("10").child("quantity").getValue().toString());
+                                N10.setText(name10+" x " + quantity10);
+                            }
+                            if(snapshot.child("11").child("quantity").getValue()==null&&snapshot.child("11").child("name").getValue()==null){
+                                N11.setVisibility(View.GONE);
+                            }else{
+                                name11 = snapshot.child("11").child("name").getValue(String.class);
+                                quantity11 = Integer.parseInt(snapshot.child("11").child("quantity").getValue().toString());
+                                N11.setText(name11+" x " + quantity11);
+                            }
 
 
 
@@ -351,8 +378,8 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                                         public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                                             for(DataSnapshot snapshot : datasnapshot.getChildren()){
 
-                                                String name1,name2,name3,name4,name5,name6,name7,name8;
-                                                int quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8;
+                                                String name1,name2,name3,name4,name5,name6,name7,name8,name9,name10,name11;
+                                                int quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8,quantity9,quantity10,quantity11;
 
                                                 if(snapshot.child("01").child("quantity").getValue()==null&&snapshot.child("01").child("name").getValue()==null){
                                                     reff2.getRef().child("name1").removeValue();
@@ -437,6 +464,42 @@ public class SummaryActivity extends AppCompatActivity implements ICartLoadListe
                                                     int st8 = Integer.parseInt(stock8);
                                                     String UpdatedStock = String.valueOf(st8-quantity8);
                                                     NewDrink.child("08").child("stocks").setValue(UpdatedStock);
+                                                }
+                                                if(snapshot.child("09").child("quantity").getValue()==null&&snapshot.child("09").child("name").getValue()==null){
+                                                    reff2.getRef().child("name9").removeValue();
+                                                    reff2.getRef().child("qty9").removeValue();
+                                                }else{
+                                                    name9 = snapshot.child("09").child("name").getValue(String.class);
+                                                    quantity9 = Integer.parseInt(snapshot.child("09").child("quantity").getValue().toString());
+                                                    productModel.setName9(name9);
+                                                    productModel.setQty9(quantity9);
+                                                    int st9 = Integer.parseInt(stock9);
+                                                    String UpdatedStock = String.valueOf(st9-quantity9);
+                                                    NewDrink.child("09").child("stocks").setValue(UpdatedStock);
+                                                }
+                                                if(snapshot.child("10").child("quantity").getValue()==null&&snapshot.child("10").child("name").getValue()==null){
+                                                    reff2.getRef().child("name10").removeValue();
+                                                    reff2.getRef().child("qty10").removeValue();
+                                                }else{
+                                                    name10 = snapshot.child("10").child("name").getValue(String.class);
+                                                    quantity10 = Integer.parseInt(snapshot.child("10").child("quantity").getValue().toString());
+                                                    productModel.setName10(name10);
+                                                    productModel.setQty10(quantity10);
+                                                    int st10 = Integer.parseInt(stock10);
+                                                    String UpdatedStock = String.valueOf(st10-quantity10);
+                                                    NewDrink.child("10").child("stocks").setValue(UpdatedStock);
+                                                }
+                                                if(snapshot.child("11").child("quantity").getValue()==null&&snapshot.child("11").child("name").getValue()==null){
+                                                    reff2.getRef().child("name11").removeValue();
+                                                    reff2.getRef().child("qty11").removeValue();
+                                                }else{
+                                                    name11 = snapshot.child("11").child("name").getValue(String.class);
+                                                    quantity11 = Integer.parseInt(snapshot.child("11").child("quantity").getValue().toString());
+                                                    productModel.setName11(name11);
+                                                    productModel.setQty11(quantity11);
+                                                    int st11 = Integer.parseInt(stock11);
+                                                    String UpdatedStock = String.valueOf(st11-quantity11);
+                                                    NewDrink.child("11").child("stocks").setValue(UpdatedStock);
                                                 }
 
 
