@@ -546,6 +546,16 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
             } else {
                 N9.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName9()).append(" x").append(productModelList.get(position).getQty9()));
             }
+            if (productModelList.get(holder.getAdapterPosition()).getName10() == null) {
+                N10.setVisibility(View.GONE);
+            } else {
+                N10.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName10()).append(" x").append(productModelList.get(position).getQty10()));
+            }
+            if (productModelList.get(holder.getAdapterPosition()).getName11() == null) {
+                N11.setVisibility(View.GONE);
+            } else {
+                N11.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName11()).append(" x").append(productModelList.get(position).getQty11()));
+            }
             btnok.setOnClickListener(view14 -> new CountDownTimer(3000, 1000) {
                 @Override
                 public void onTick(long l) {
