@@ -268,6 +268,9 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
                 stock6 = snapshot.child("06").child("stocks").getValue(String.class);
                 stock7 = snapshot.child("07").child("stocks").getValue(String.class);
                 stock8 = snapshot.child("08").child("stocks").getValue(String.class);
+                stock9 = snapshot.child("09").child("stocks").getValue(String.class);
+                stock10 = snapshot.child("10").child("stocks").getValue(String.class);
+                stock11 = snapshot.child("11").child("stocks").getValue(String.class);
             }
 
             @Override
