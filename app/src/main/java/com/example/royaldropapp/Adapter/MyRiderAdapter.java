@@ -150,6 +150,25 @@ public class MyRiderAdapter extends RecyclerView.Adapter<MyRiderAdapter.MyRiderH
             holder.txtN8.setVisibility(View.VISIBLE);
             holder.txtN8.setText(new StringBuilder().append(riderModelList.get(position).getName8()).append(" x").append(riderModelList.get(position).getQty8()));
         }
+        if(riderModelList.get(position).getName9() == null){
+            holder.txtN9.setVisibility(View.GONE);
+        }else{
+            holder.txtN9.setVisibility(View.VISIBLE);
+            holder.txtN9.setText(new StringBuilder().append(riderModelList.get(position).getName9()).append(" x").append(riderModelList.get(position).getQty9()));
+        }
+        if(riderModelList.get(position).getName10() == null){
+            holder.txtN10.setVisibility(View.GONE);
+        }else{
+            holder.txtN10.setVisibility(View.VISIBLE);
+            holder.txtN10.setText(new StringBuilder().append(riderModelList.get(position).getName10()).append(" x").append(riderModelList.get(position).getQty10()));
+        }
+        if(riderModelList.get(position).getName11() == null){
+            holder.txtN11.setVisibility(View.GONE);
+        }else{
+            holder.txtN11.setVisibility(View.VISIBLE);
+            holder.txtN11.setText(new StringBuilder().append(riderModelList.get(position).getName11()).append(" x").append(riderModelList.get(position).getQty11()));
+        }
+
         holder.txtAddress.setText(new StringBuilder().append(riderModelList.get(position).getAddress()));
         holder.txtTotalOrderP.setText(String.format("%.2f",(riderModelList.get(position).getTotalPrice())));
         holder.txtIDNUM.setText(riderModelList.get(position).getKey());
@@ -184,6 +203,17 @@ public class MyRiderAdapter extends RecyclerView.Adapter<MyRiderAdapter.MyRiderH
 
         String name8 = String.valueOf(new StringBuilder().append(riderModelList.get(position).getName8()));
         String qty8 =  String.valueOf(new StringBuilder().append(riderModelList.get(position).getQty8()));
+
+        String name9 = String.valueOf(new StringBuilder().append(riderModelList.get(position).getName9()));
+        String qty9 =  String.valueOf(new StringBuilder().append(riderModelList.get(position).getQty9()));
+
+        String name10= String.valueOf(new StringBuilder().append(riderModelList.get(position).getName10()));
+        String qty10 =  String.valueOf(new StringBuilder().append(riderModelList.get(position).getQty10()));
+
+        String name11 = String.valueOf(new StringBuilder().append(riderModelList.get(position).getName11()));
+        String qty11 =  String.valueOf(new StringBuilder().append(riderModelList.get(position).getQty11()));
+
+
 
 
 
@@ -346,6 +376,30 @@ public class MyRiderAdapter extends RecyclerView.Adapter<MyRiderAdapter.MyRiderH
                                             riderModel.setName8(name8);
                                             riderModel.setQty8(Integer.parseInt(qty8));
                                         }
+
+                                        if(snapshot.child(key).child("name9").getValue()==null){
+                                            reff2.getRef().child("name9").removeValue();
+                                            reff2.getRef().child("qty9").removeValue();
+                                        }else{
+                                            riderModel.setName9(name9);
+                                            riderModel.setQty9(Integer.parseInt(qty9));
+                                        }
+
+                                        if(snapshot.child(key).child("name10").getValue()==null){
+                                            reff2.getRef().child("name10").removeValue();
+                                            reff2.getRef().child("qty10").removeValue();
+                                        }else{
+                                            riderModel.setName10(name10);
+                                            riderModel.setQty10(Integer.parseInt(qty10));
+                                        }
+
+                                        if(snapshot.child(key).child("name11").getValue()==null){
+                                            reff2.getRef().child("name11").removeValue();
+                                            reff2.getRef().child("qty11").removeValue();
+                                        }else{
+                                            riderModel.setName11(name11);
+                                            riderModel.setQty11(Integer.parseInt(qty11));
+                                        }
                                         riderModel.setAddress(String.valueOf(snapshot.child(key).child("address").getValue()));
                                         riderModel.setTotalPrice(Float.parseFloat(holder.txtTotalOrderP.getText().toString().trim()));
                                         riderModel.setCustomerName(holder.customer.getText().toString().trim());
@@ -422,6 +476,12 @@ public class MyRiderAdapter extends RecyclerView.Adapter<MyRiderAdapter.MyRiderH
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
+        @BindView(R.id.txtName9)
+        TextView txtN9;
+        @BindView(R.id.txtName10)
+        TextView txtN10;
+        @BindView(R.id.txtName11)
+        TextView txtN11;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
         @BindView(R.id.txtTotalOrderPrice)

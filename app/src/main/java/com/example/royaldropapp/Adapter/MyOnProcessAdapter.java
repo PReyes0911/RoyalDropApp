@@ -130,6 +130,24 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
             holder.txtN8.setVisibility(View.VISIBLE);
             holder.txtN8.setText(new StringBuilder().append(deliverModelList.get(position).getName8()).append(" x").append(deliverModelList.get(position).getQty8()));
         }
+        if(deliverModelList.get(position).getName9() == null){
+            holder.txtN9.setVisibility(View.GONE);
+        }else{
+            holder.txtN9.setVisibility(View.VISIBLE);
+            holder.txtN9.setText(new StringBuilder().append(deliverModelList.get(position).getName9()).append(" x").append(deliverModelList.get(position).getQty9()));
+        }
+        if(deliverModelList.get(position).getName10() == null){
+            holder.txtN10.setVisibility(View.GONE);
+        }else{
+            holder.txtN10.setVisibility(View.VISIBLE);
+            holder.txtN10.setText(new StringBuilder().append(deliverModelList.get(position).getName10()).append(" x").append(deliverModelList.get(position).getQty10()));
+        }
+        if(deliverModelList.get(position).getName11() == null){
+            holder.txtN11.setVisibility(View.GONE);
+        }else{
+            holder.txtN11.setVisibility(View.VISIBLE);
+            holder.txtN11.setText(new StringBuilder().append(deliverModelList.get(position).getName11()).append(" x").append(deliverModelList.get(position).getQty11()));
+        }
         holder.txtAddress.setText(new StringBuilder().append(deliverModelList.get(position).getAddress()));
         holder.txtStat.setText(deliverModelList.get(position).getStatus());
         holder.txtStat.setTextColor(Color.parseColor("#FFA500"));
@@ -166,6 +184,15 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
 
         String name8 = String.valueOf(new StringBuilder().append(deliverModelList.get(position).getName8()));
         String qty8 =  String.valueOf(new StringBuilder().append(deliverModelList.get(position).getQty8()));
+
+        String name9 = String.valueOf(new StringBuilder().append(deliverModelList.get(position).getName9()));
+        String qty9 =  String.valueOf(new StringBuilder().append(deliverModelList.get(position).getQty9()));
+
+        String name10 = String.valueOf(new StringBuilder().append(deliverModelList.get(position).getName10()));
+        String qty10 =  String.valueOf(new StringBuilder().append(deliverModelList.get(position).getQty10()));
+
+        String name11 = String.valueOf(new StringBuilder().append(deliverModelList.get(position).getName11()));
+        String qty11 =  String.valueOf(new StringBuilder().append(deliverModelList.get(position).getQty11()));
 
 
         holder.btnOFD.setOnClickListener(new View.OnClickListener() {
@@ -264,6 +291,27 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
                                         }else{
                                             deliverModel.setName8(name8);
                                             deliverModel.setQty8(Integer.parseInt(qty8));
+                                        }
+                                        if(snapshot.child(key).child("name9").getValue()==null){
+                                            reff2.getRef().child("name9").removeValue();
+                                            reff2.getRef().child("qty9").removeValue();
+                                        }else{
+                                            deliverModel.setName9(name9);
+                                            deliverModel.setQty9(Integer.parseInt(qty9));
+                                        }
+                                        if(snapshot.child(key).child("name10").getValue()==null){
+                                            reff2.getRef().child("name10").removeValue();
+                                            reff2.getRef().child("qty10").removeValue();
+                                        }else{
+                                            deliverModel.setName10(name10);
+                                            deliverModel.setQty10(Integer.parseInt(qty10));
+                                        }
+                                        if(snapshot.child(key).child("name11").getValue()==null){
+                                            reff2.getRef().child("name11").removeValue();
+                                            reff2.getRef().child("qty11").removeValue();
+                                        }else{
+                                            deliverModel.setName11(name11);
+                                            deliverModel.setQty11(Integer.parseInt(qty11));
                                         }
 
 
@@ -431,6 +479,12 @@ public class MyOnProcessAdapter extends RecyclerView.Adapter<MyOnProcessAdapter.
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
+        @BindView(R.id.txtName9)
+        TextView txtN9;
+        @BindView(R.id.txtName10)
+        TextView txtN10;
+        @BindView(R.id.txtName11)
+        TextView txtN11;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
         @BindView(R.id.txtTotalOrderPrice)

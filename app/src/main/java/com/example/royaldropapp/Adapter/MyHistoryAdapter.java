@@ -88,6 +88,27 @@ public class MyHistoryAdapter extends RecyclerView.Adapter<MyHistoryAdapter.MyHi
             holder.txtN8.setVisibility(View.VISIBLE);
             holder.txtN8.setText(new StringBuilder().append(historyModelList.get(position).getName8()).append(" x").append(historyModelList.get(position).getQty8()));
         }
+
+        if(historyModelList.get(position).getName9() == null){
+            holder.txtN9.setVisibility(View.GONE);
+        }else{
+            holder.txtN9.setVisibility(View.VISIBLE);
+            holder.txtN9.setText(new StringBuilder().append(historyModelList.get(position).getName9()).append(" x").append(historyModelList.get(position).getQty9()));
+        }
+
+        if(historyModelList.get(position).getName10() == null){
+            holder.txtN10.setVisibility(View.GONE);
+        }else{
+            holder.txtN10.setVisibility(View.VISIBLE);
+            holder.txtN10.setText(new StringBuilder().append(historyModelList.get(position).getName10()).append(" x").append(historyModelList.get(position).getQty10()));
+        }
+
+        if(historyModelList.get(position).getName11() == null){
+            holder.txtN11.setVisibility(View.GONE);
+        }else{
+            holder.txtN11.setVisibility(View.VISIBLE);
+            holder.txtN11.setText(new StringBuilder().append(historyModelList.get(position).getName11()).append(" x").append(historyModelList.get(position).getQty11()));
+        }
         holder.txtCustomerN.setText(new StringBuilder().append(historyModelList.get(position).getCustomerName()));
         holder.txtAddress.setText(new StringBuilder().append(historyModelList.get(position).getAddress()));
         holder.txtStat.setText(new StringBuilder().append(historyModelList.get(position).getStatus()));
@@ -126,6 +147,12 @@ public class MyHistoryAdapter extends RecyclerView.Adapter<MyHistoryAdapter.MyHi
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
+        @BindView(R.id.txtName9)
+        TextView txtN9;
+        @BindView(R.id.txtName10)
+        TextView txtN10;
+        @BindView(R.id.txtName11)
+        TextView txtN11;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
         @BindView(R.id.txtTotalOrderPrice)
@@ -144,6 +171,7 @@ public class MyHistoryAdapter extends RecyclerView.Adapter<MyHistoryAdapter.MyHi
         TextView txtout;
         @BindView(R.id.textView8)
         TextView text;
+
 
         Unbinder unbinder;
 

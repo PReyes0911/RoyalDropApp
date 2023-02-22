@@ -3,8 +3,8 @@ package com.example.royaldropapp.Model;
 public class RiderModel {
 
     String key;
-    String name1,name2,name3,name4,name5,name6,name7,name8;
-    int qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8;
+    String name1,name2,name3,name4,name5,name6,name7,name8,name9,name10,name11;
+    int qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11;
     String address;
     String status;
     String PID,UID;
@@ -110,6 +110,30 @@ public class RiderModel {
         this.name8 = name8;
     }
 
+    public String getName9() {
+        return name9;
+    }
+
+    public void setName9(String name9) {
+        this.name9 = name9;
+    }
+
+    public String getName10() {
+        return name10;
+    }
+
+    public void setName10(String name10) {
+        this.name10 = name10;
+    }
+
+    public String getName11() {
+        return name11;
+    }
+
+    public void setName11(String name11) {
+        this.name11 = name11;
+    }
+
     public int getQty1() {
         return qty1;
     }
@@ -172,6 +196,30 @@ public class RiderModel {
 
     public void setQty8(int qty8) {
         this.qty8 = qty8;
+    }
+
+    public int getQty9() {
+        return qty9;
+    }
+
+    public void setQty9(int qty9) {
+        this.qty9 = qty9;
+    }
+
+    public int getQty10() {
+        return qty10;
+    }
+
+    public void setQty10(int qty10) {
+        this.qty10 = qty10;
+    }
+
+    public int getQty11() {
+        return qty11;
+    }
+
+    public void setQty11(int qty11) {
+        this.qty11 = qty11;
     }
 
     public String getAddress() {

@@ -50,7 +50,7 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     PersonalOrderModel personalOrderModel;
 
-    String stock5,stock6,stock7,stock8;
+    String stock5,stock6,stock7,stock8,stock9,stock10,stock11;
 
     Calendar calendar = Calendar.getInstance();
 
@@ -130,6 +130,27 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
             holder.txtN8.setVisibility(View.VISIBLE);
             holder.txtN8.setText(new StringBuilder().append(personalOrderModelList.get(position).getName8()).append(" x").append(personalOrderModelList.get(position).getQty8()));
         }
+
+        if(personalOrderModelList.get(position).getName9() == null){
+            holder.txtN9.setVisibility(View.GONE);
+        }else{
+            holder.txtN9.setVisibility(View.VISIBLE);
+            holder.txtN9.setText(new StringBuilder().append(personalOrderModelList.get(position).getName9()).append(" x").append(personalOrderModelList.get(position).getQty9()));
+        }
+
+        if(personalOrderModelList.get(position).getName10() == null){
+            holder.txtN10.setVisibility(View.GONE);
+        }else{
+            holder.txtN10.setVisibility(View.VISIBLE);
+            holder.txtN10.setText(new StringBuilder().append(personalOrderModelList.get(position).getName10()).append(" x").append(personalOrderModelList.get(position).getQty10()));
+        }
+
+        if(personalOrderModelList.get(position).getName11() == null){
+            holder.txtN11.setVisibility(View.GONE);
+        }else{
+            holder.txtN11.setVisibility(View.VISIBLE);
+            holder.txtN11.setText(new StringBuilder().append(personalOrderModelList.get(position).getName11()).append(" x").append(personalOrderModelList.get(position).getQty11()));
+        }
         holder.txtAddress.setText(new StringBuilder().append(personalOrderModelList.get(position).getAddress()));
         holder.txtStat.setText(new StringBuilder().append(personalOrderModelList.get(position).getStatus()));
         holder.txtStat.setTextColor(Color.parseColor("#FF0000"));
@@ -165,6 +186,14 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
         String name8 = String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getName8()));
         String qty8 =  String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getQty8()));
 
+        String name9 = String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getName9()));
+        String qty9 =  String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getQty9()));
+
+        String name10 = String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getName10()));
+        String qty10 =  String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getQty10()));
+
+        String name11 = String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getName11()));
+        String qty11 =  String.valueOf(new StringBuilder().append(personalOrderModelList.get(position).getQty11()));
 
 
         if (holder.txtStat.getText().toString().equals("Pending")){
@@ -334,6 +363,27 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
                                         personalOrderModel.setName8(name8);
                                         personalOrderModel.setQty8(Integer.parseInt(qty8));
                                     }
+                                    if(snapshot.child("name9").getValue()==null){
+                                        reff2.getRef().child("name9").removeValue();
+                                        reff2.getRef().child("qty9").removeValue();
+                                    }else{
+                                        personalOrderModel.setName9(name9);
+                                        personalOrderModel.setQty9(Integer.parseInt(qty9));
+                                    }
+                                    if(snapshot.child("name10").getValue()==null){
+                                        reff2.getRef().child("name10").removeValue();
+                                        reff2.getRef().child("qty10").removeValue();
+                                    }else{
+                                        personalOrderModel.setName10(name10);
+                                        personalOrderModel.setQty10(Integer.parseInt(qty10));
+                                    }
+                                    if(snapshot.child("name11").getValue()==null){
+                                        reff2.getRef().child("name11").removeValue();
+                                        reff2.getRef().child("qty11").removeValue();
+                                    }else{
+                                        personalOrderModel.setName11(name11);
+                                        personalOrderModel.setQty11(Integer.parseInt(qty11));
+                                    }
 
 
                                     personalOrderModel.setTotalPrice(Float.parseFloat(holder.txtTotalOrderP.getText().toString().trim()));
@@ -501,7 +551,7 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
 
                 Button btnok = dialog.findViewById(R.id.btn_cancel);
                 Button notyet = dialog.findViewById(R.id.btn_dont_cancel);
-                TextView N1,N2,N3,N4,N5,N6,N7,N8,Address;
+                TextView N1,N2,N3,N4,N5,N6,N7,N8,N9,N10,N11,Address;
                 N1 = dialog.findViewById(R.id.txtCName1);
                 N2 = dialog.findViewById(R.id.txtCName2);
                 N3 = dialog.findViewById(R.id.txtCName3);
@@ -510,6 +560,9 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
                 N6 = dialog.findViewById(R.id.txtCName6);
                 N7 = dialog.findViewById(R.id.txtCName7);
                 N8 = dialog.findViewById(R.id.txtCName8);
+                N9 = dialog.findViewById(R.id.txtCName9);
+                N10 = dialog.findViewById(R.id.txtCName10);
+                N11 = dialog.findViewById(R.id.txtCName11);
                 Address = dialog.findViewById(R.id.txtCancelAddress);
 
                 Address.setText(new StringBuilder().append(personalOrderModelList.get(holder.getAdapterPosition()).getAddress()));
@@ -553,6 +606,21 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
                     N8.setVisibility(View.GONE);
                 }else{
                     N8.setText(new StringBuilder().append(personalOrderModelList.get(holder.getAdapterPosition()).getName8()));
+                }
+                if(personalOrderModelList.get(holder.getAdapterPosition()).getName9() == null){
+                    N9.setVisibility(View.GONE);
+                }else{
+                    N9.setText(new StringBuilder().append(personalOrderModelList.get(holder.getAdapterPosition()).getName9()));
+                }
+                if(personalOrderModelList.get(holder.getAdapterPosition()).getName10() == null){
+                    N10.setVisibility(View.GONE);
+                }else{
+                    N10.setText(new StringBuilder().append(personalOrderModelList.get(holder.getAdapterPosition()).getName10()));
+                }
+                if(personalOrderModelList.get(holder.getAdapterPosition()).getName11() == null){
+                    N11.setVisibility(View.GONE);
+                }else{
+                    N11.setText(new StringBuilder().append(personalOrderModelList.get(holder.getAdapterPosition()).getName11()));
                 }
                 btnok.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -647,6 +715,36 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
                                                 String UpdatedStock = String.valueOf(st8+Integer.parseInt(qty8));
                                                 NewDrink.child("08").child("stocks").setValue(UpdatedStock);
                                             }
+                                            if(snapshot.child(key).child("name9").getValue()==null){
+                                                reff2.getRef().child("name9").removeValue();
+                                                reff2.getRef().child("qty9").removeValue();
+                                            }else{
+                                                personalOrderModel.setName9(name9);
+                                                personalOrderModel.setQty9(Integer.parseInt(qty9));
+                                                int st9 = Integer.parseInt(stock9);
+                                                String UpdatedStock = String.valueOf(st9+Integer.parseInt(qty9));
+                                                NewDrink.child("09").child("stocks").setValue(UpdatedStock);
+                                            }
+                                            if(snapshot.child(key).child("name10").getValue()==null){
+                                                reff2.getRef().child("name10").removeValue();
+                                                reff2.getRef().child("qty10").removeValue();
+                                            }else{
+                                                personalOrderModel.setName10(name10);
+                                                personalOrderModel.setQty10(Integer.parseInt(qty10));
+                                                int st10 = Integer.parseInt(stock10);
+                                                String UpdatedStock = String.valueOf(st10+Integer.parseInt(qty10));
+                                                NewDrink.child("010").child("stocks").setValue(UpdatedStock);
+                                            }
+                                            if(snapshot.child(key).child("name11").getValue()==null){
+                                                reff2.getRef().child("name11").removeValue();
+                                                reff2.getRef().child("qty11").removeValue();
+                                            }else{
+                                                personalOrderModel.setName11(name11);
+                                                personalOrderModel.setQty11(Integer.parseInt(qty11));
+                                                int st11 = Integer.parseInt(stock11);
+                                                String UpdatedStock = String.valueOf(st11+Integer.parseInt(qty11));
+                                                NewDrink.child("011").child("stocks").setValue(UpdatedStock);
+                                            }
 
                                             personalOrderModel.setAddress(String.valueOf(snapshot.child(key).child("address").getValue()));
                                             personalOrderModel.setTotalPrice(Float.parseFloat((snapshot.child(key).child("totalPrice").getValue().toString())));
@@ -722,6 +820,12 @@ public class MyPersonalHistoryAdapter extends RecyclerView.Adapter<MyPersonalHis
         TextView txtN7;
         @BindView(R.id.txtName8)
         TextView txtN8;
+        @BindView(R.id.txtName9)
+        TextView txtN9;
+        @BindView(R.id.txtName10)
+        TextView txtN10;
+        @BindView(R.id.txtName11)
+        TextView txtN11;
         @BindView(R.id.txtAddress)
         TextView txtAddress;
         @BindView(R.id.txtTotalOrderPrice)

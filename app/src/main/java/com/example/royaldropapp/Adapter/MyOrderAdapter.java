@@ -161,6 +161,25 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
             holder.txtN8.setVisibility(View.VISIBLE);
             holder.txtN8.setText(new StringBuilder().append(productModelList.get(position).getName8()).append(" x").append(productModelList.get(position).getQty8()));
         }
+        if (productModelList.get(position).getName9() == null) {
+            holder.txtN9.setVisibility(View.GONE);
+        } else {
+            holder.txtN9.setVisibility(View.VISIBLE);
+            holder.txtN9.setText(new StringBuilder().append(productModelList.get(position).getName9()).append(" x").append(productModelList.get(position).getQty9()));
+        }
+        if (productModelList.get(position).getName10() == null) {
+            holder.txtN10.setVisibility(View.GONE);
+        } else {
+            holder.txtN10.setVisibility(View.VISIBLE);
+            holder.txtN10.setText(new StringBuilder().append(productModelList.get(position).getName10()).append(" x").append(productModelList.get(position).getQty10()));
+        }
+        if (productModelList.get(position).getName11() == null) {
+            holder.txtN11.setVisibility(View.GONE);
+        } else {
+            holder.txtN11.setVisibility(View.VISIBLE);
+            holder.txtN11.setText(new StringBuilder().append(productModelList.get(position).getName11()).append(" x").append(productModelList.get(position).getQty11()));
+        }
+
         holder.txtName.setText(new StringBuilder().append(productModelList.get(position).getCustname()));
         holder.txtAddress.setText(new StringBuilder().append(productModelList.get(position).getAddress()));
         holder.txtStat.setText(new StringBuilder().append(productModelList.get(position).getStatus()));
@@ -198,6 +217,14 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
         String name8 = String.valueOf(new StringBuilder().append(productModelList.get(position).getName8()));
         String qty8 = String.valueOf(new StringBuilder().append(productModelList.get(position).getQty8()));
 
+        String name9 = String.valueOf(new StringBuilder().append(productModelList.get(position).getName9()));
+        String qty9 = String.valueOf(new StringBuilder().append(productModelList.get(position).getQty9()));
+
+        String name10 = String.valueOf(new StringBuilder().append(productModelList.get(position).getName10()));
+        String qty10 = String.valueOf(new StringBuilder().append(productModelList.get(position).getQty10()));
+
+        String name11 = String.valueOf(new StringBuilder().append(productModelList.get(position).getName11()));
+        String qty11 = String.valueOf(new StringBuilder().append(productModelList.get(position).getQty11()));
 
         if (holder.txtStat.getText().toString().equals("Pending")) {
             holder.btnProc.setVisibility(View.GONE);
@@ -222,7 +249,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
 
             Button btnok = dialog.findViewById(R.id.btn_okay2);
             Button notyet = dialog.findViewById(R.id.btn_notyet);
-            TextView N1, N2, N3, N4, N5, N6, N7, N8, Cust, Address, phone;
+            TextView N1, N2, N3, N4, N5, N6, N7, N8,N9,N10,N11, Cust, Address, phone;
             RadioButton rb1,rb2,rb3;
             N1 = dialog.findViewById(R.id.txtName1);
             N2 = dialog.findViewById(R.id.txtName2);
@@ -232,6 +259,9 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
             N6 = dialog.findViewById(R.id.txtName6);
             N7 = dialog.findViewById(R.id.txtName7);
             N8 = dialog.findViewById(R.id.txtName8);
+            N9 = dialog.findViewById(R.id.txtName9);
+            N10 = dialog.findViewById(R.id.txtName10);
+            N11 = dialog.findViewById(R.id.txtName11);
             rb1 = dialog.findViewById(R.id.rb_rider1);
             rb2 = dialog.findViewById(R.id.rb_rider2);
             rb3 = dialog.findViewById(R.id.rb_rider3);
@@ -327,6 +357,21 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
             } else {
                 N8.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName8()).append(" x").append(productModelList.get(position).getQty8()));
             }
+            if (productModelList.get(holder.getAdapterPosition()).getName9() == null) {
+                N9.setVisibility(View.GONE);
+            } else {
+                N9.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName9()).append(" x").append(productModelList.get(position).getQty9()));
+            }
+            if (productModelList.get(holder.getAdapterPosition()).getName10() == null) {
+                N10.setVisibility(View.GONE);
+            } else {
+                N10.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName10()).append(" x").append(productModelList.get(position).getQty10()));
+            }
+            if (productModelList.get(holder.getAdapterPosition()).getName11() == null) {
+                N11.setVisibility(View.GONE);
+            } else {
+                N11.setText(new StringBuilder().append(productModelList.get(holder.getAdapterPosition()).getName11()).append(" x").append(productModelList.get(position).getQty11()));
+            }
 
                 btnok.setOnClickListener(view1 -> new CountDownTimer(3000, 1000) {
                 @Override
@@ -409,6 +454,13 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
                                         deliverModel.setName8(name8);
                                         deliverModel.setQty8(Integer.parseInt(qty8));
                                     }
+                                    if (snapshot.child(key2).child("name9").getValue() == null) {
+                                        reff2.getRef().child("name9").removeValue();
+                                        reff2.getRef().child("qty9").removeValue();
+                                    } else {
+                                        deliverModel.setName9(name9);
+                                        deliverModel.setQty9(Integer.parseInt(qty9));
+                                    }
                                     deliverModel.setAddress(String.valueOf(snapshot.child(key2).child("address").getValue()));
                                     deliverModel.setTotalPrice(Float.parseFloat((snapshot.child(key2).child("totalPrice").getValue().toString())));
                                     deliverModel.setStatus("On-going Delivery");
@@ -489,9 +541,9 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
             N6 = dialog.findViewById(R.id.txtName6);
             N7 = dialog.findViewById(R.id.txtName7);
             N8 = dialog.findViewById(R.id.txtName8);
-            N9 = dialog.findViewById(R.id.txtName8);
-            N10 = dialog.findViewById(R.id.txtName8);
-            N11 = dialog.findViewById(R.id.txtName8);
+            N9 = dialog.findViewById(R.id.txtName9);
+            N10 = dialog.findViewById(R.id.txtName10);
+            N11 = dialog.findViewById(R.id.txtName11);
             // count = dialog.findViewById(R.id.txtcountdown);
             Name = dialog.findViewById(R.id.txtCustomerName);
             Address = dialog.findViewById(R.id.txtAddressDialog);
@@ -746,6 +798,17 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyOrderH
                                                     String UpdatedStock = String.valueOf(st8+Integer.parseInt(qty8));
                                                     NewDrink.child("08").child("stocks").setValue(UpdatedStock);
                                                 }
+                                                if(snapshot.child(key2).child("name9").getValue()==null){
+                                                    reff2.getRef().child("name9").removeValue();
+                                                    reff2.getRef().child("qty9").removeValue();
+                                                }else{
+                                                    deliverModel.setName9(name9);
+                                                    deliverModel.setQty9(Integer.parseInt(qty9));
+                                                    int st9 = Integer.parseInt(stock9);
+                                                    String UpdatedStock = String.valueOf(st9+Integer.parseInt(qty9));
+                                                    NewDrink.child("09").child("stocks").setValue(UpdatedStock);
+                                                }
+
 
 
                                                 deliverModel.setAddress(String.valueOf(snapshot.child(key2).child("address").getValue()));
